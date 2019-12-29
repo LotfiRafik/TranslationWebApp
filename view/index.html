@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link href="template/template.css" rel="stylesheet">		
+		<link href="login/sign.css" rel="stylesheet">		
+		<link href="index.css" rel="stylesheet">	
+		<link href="blog/blog.css" rel="stylesheet">	
+		<link href="forms/form2.css" rel="stylesheet">		
+	
+
+		<title>foobar</title>
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="template/template.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+              diapo(0);
+			});
+		</script>
+	</head>
+	<body>
+		<div class="top-template"> 
+			<img src="template/logo.jpg"  alt="logo"  class="logo">
+			<ul class="link-menu">
+				<li><a href="/cat/developers/" target="_self"> Link1 </a></li>
+				<li><a href="/cat/developers/" target="_self"> Link2 </a></li>
+				<li><a href="/cat/developers/" target="_self"> Link3 </a></li>	
+			</ul>		
+		</div>
+		<ul class="main-menu">
+				<li><a href="#home">Home</a></li>
+				<li><a href="#news">News</a></li>
+			   <li><a href="#news">Traduction</a></li>
+			   <li><a href="#news">Recrutement</a></li>
+			   <li><a href="#news">A propos</a></li>
+		</ul>
+		<div class="diaporama" style="height: 30%;width: 80%;margin-left: 10%;margin-right: 10%;">
+			<img class="slide" src="template/diaporama_images/1.jpeg" style="width:100%;height:100%;display:none;">
+			<img class="slide" src="template/diaporama_images/2.jpeg" style="width:100%;height:100%;display:none;">
+			<img class="slide" src="template/diaporama_images/3.jpeg" style="width:100%;height:100%;display:none;">
+		</div>
+		
+	
+
+		<div class="zone">
+		<div class="right_zone">
+			<h1>Zone de contenu droite</h1>
+			<button class="signbtn" onclick="document.getElementById('login').style.display='block'">Login</button>
+			<button class="signbtn" onclick="document.getElementById('signup').style.display='block'">Sign-Up</button>
+			<div id="login" class="sign">
+				<form class="sign-content" action="../template.html">
+					<span onclick="document.getElementById('login').style.display='none'"
+					class="sign-close" >&times;</span>
+					<div class="sign-container">
+						<label for="uname"><b>Username</b></label>
+						<input type="text" placeholder="Enter Username" name="uname" required>
+						<label for="psw"><b>Password</b></label>
+						<input type="password" placeholder="Enter Password" name="psw" required>
+						<button type="submit">sign</button>
+						<label>
+							<input type="checkbox" checked="checked" name="remember"> Remember me
+						</label>
+					</div>
+					<div class="sign-container" style="background-color:#f1f1f1">
+						<button type="button" onclick="document.getElementById('login').style.display='none'" 	class="sign-cancelbtn">Cancel</button>
+						<span class="sign-psw">Forgot <a href="#">password?</a></span>
+					</div>
+				</form>
+			</div>	
+			<div id="signup" class="sign">
+				<form class="sign-content" action="../template.html">
+					<span onclick="document.getElementById('signup').style.display='none'" class="sign-close" >&times;</span>
+					<div class="sign-container">
+						<h1>Sign Up</h1>
+						<p>Please fill in this form to create an account.</p>
+						<hr>
+						<label for="email"><b>Email</b></label>
+						<input type="text" placeholder="Enter Email" name="email" required>
+						<label for="psw"><b>Password</b></label>
+						<input type="password" placeholder="Enter Password" name="psw" required>
+						<label for="psw-repeat"><b>Repeat Password</b></label>
+						<input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+						<label>
+							<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+						</label>
+						<p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+						<button type="button" onclick="document.getElementById('signup').style.display='none'" class="sign-cancelbtn">Cancel</button>
+						<button type="submit" class="sign-button">Sign Up</button>
+					</div>
+				</form>
+			</div>	
+
+			<div class="form-style-5">
+				<form>
+					<h1>Demande de traduction :</h1>
+					<input type="text" name="nom" placeholder="Votre nom *">
+					<input type="text" name="prenom" placeholder="Votre prenom*">
+					<input type="email" name="email" placeholder="Votre email *">
+					<input type="text" name="tel" placeholder="Votre numero de telephone *">
+					<input type="text" name="adresse" placeholder="Votre adresse">	
+					<input type="text" name="langueo" placeholder="Langue d'origine des documents*">
+					<input type="text" name="languec" placeholder="Langue cible*">
+					<label for="job">Type de traduction souhaité:</label>
+					<select id="type_traduction" name="type_traduction">
+					  <option value="generale">Générale</option>
+					  <option value="scientifique">Scientifique</option>
+					  <option value="siteweb">Site web</option>
+					</select>    
+					<textarea name="commentaire" placeholder="Demande spécifique / commentaire ..."></textarea>	
+					<label>Choisir le document a traduire :
+						<input type="file" name="document">
+					</label>
+					<label for="assermente"> Traducteur Assermenté :
+						<input type="checkbox" id="assermente" name="assermente" value="oui">
+					</label></br>
+					<input type="submit" value="Apply" />
+				</form>	
+			</div>
+		</div>
+
+		<div class="left_zone">
+			<h1>Zone de contenu gauche</h1>
+            <div class="blog">
+			<div class="container">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="row">
+								<div class="col-md-12 post">
+									<div class="row">
+										<div class="col-md-12">
+											<h4>
+												<strong><a href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html" class="post-title">Cool Share Button Effects Styles</a></strong></h4>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 post-header-line">
+											<span class="glyphicon glyphicon-user"></span>by <a href="#">Bhaumik</a> | <span class="glyphicon glyphicon-calendar">
+											</span>Sept 16th, 2012 | <span class="glyphicon glyphicon-comment"></span><a href="#">
+												3 Comments</a> | <i class="icon-share"></i><a href="#">39 Shares</a> | <span class="glyphicon glyphicon-tags">
+												</span>Tags : <a href="#"><span class="label label-info">Snipp</span></a> <a href="#">
+													<span class="label label-info">Bootstrap</span></a> <a href="#"><span class="label label-info">
+														UI</span></a> <a href="#"><span class="label label-info">growth</span></a>
+										</div>
+									</div>
+									<div class="row post-content">
+										<div class="col-md-3">
+											<a href="#">
+											<img src="http://4.bp.blogspot.com/-_lqoNpVXeU4/UkxQ7N-QW8I/AAAAAAAACTw/pni-TZyp17o/s1600/cool+share+button+effects+styles.png" alt="" class="img-responsive">
+											</a>
+										</div>
+										<div class="col-md-9">
+											<p>
+												Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option.
+												Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari
+												conclusionemque, ad nobis propriae quaerendum sea.
+											</p>
+											<p>
+												<a class="btn btn-read-more" href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html">Read more</a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 post">
+									<div class="row">
+										<div class="col-md-12">
+											<h4>
+												<strong><a href="http://www.jquery2dotnet.com/2013/12/brand-icons-design-using-css.html" class="post-title">Brand Icons Design Using Css</a></strong></h4>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 post-header-line">
+											<span class="glyphicon glyphicon-user"></span>by <a href="#">Bhaumik</a> | <span class="glyphicon glyphicon-calendar">
+											</span>Sept 16th, 2012 | <span class="glyphicon glyphicon-comment"></span><a href="#">
+												3 Comments</a> | <i class="icon-share"></i><a href="#">39 Shares</a> | <span class="glyphicon glyphicon-tags">
+												</span>Tags : <a href="#"><span class="label label-info">Snipp</span></a> <a href="#">
+													<span class="label label-info">Bootstrap</span></a> <a href="#"><span class="label label-info">
+														UI</span></a> <a href="#"><span class="label label-info">growth</span></a>
+										</div>
+									</div>
+									<div class="row post-content">
+										<div class="col-md-3">
+											<a href="#">
+											</a>
+										</div>
+										<div class="col-md-9">
+											<p>
+												Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option.
+												Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari
+												conclusionemque, ad nobis propriae quaerendum sea.
+											</p>
+											<p>
+												<a class="btn btn-read-more" href="http://www.jquery2dotnet.com/2013/12/brand-icons-design-using-css.html">Read more</a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 post">
+									<div class="row">
+										<div class="col-md-12">
+											<h4>
+												<strong><a href="http://www.jquery2dotnet.com/2013/11/cool-big-social-counter-button-with.html" class="post-title">Cool Big Social Counter Button With Bootstrap</a></strong></h4>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 post-header-line">
+											<span class="glyphicon glyphicon-user"></span>by <a href="#">Bhaumik</a> | <span class="glyphicon glyphicon-calendar">
+											</span>Sept 16th, 2012 | <span class="glyphicon glyphicon-comment"></span><a href="#">
+												3 Comments</a> | <i class="icon-share"></i><a href="#">39 Shares</a> | <span class="glyphicon glyphicon-tags">
+												</span>Tags : <a href="#"><span class="label label-info">Snipp</span></a> <a href="#">
+													<span class="label label-info">Bootstrap</span></a> <a href="#"><span class="label label-info">
+														UI</span></a> <a href="#"><span class="label label-info">growth</span></a>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br style="clear:both;"/>
+    	</div>
+
+		<footer>
+				<ul class="main-menu">
+						<li><a href="#home">Home</a></li>
+						<li><a href="#news">News</a></li>
+					   <li><a href="#news">Traduction</a></li>
+					   <li><a href="#news">Recrutement</a></li>
+					   <li><a href="#news">A propos</a></li>
+				</ul>
+		</footer>
+	</body>
+</html>

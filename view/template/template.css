@@ -1,0 +1,81 @@
+html, body {
+	 height: 100%; width: 100%; margin: 0px;
+    font-family:Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    line-height: 1.42857;
+	color: #222; 
+}
+
+.top-template
+{      
+	position: relative;
+	top : 0px;
+	width: 100%;
+	height: 10%;
+	background-color: white;
+}
+
+div.top-template .logo
+{      
+	position: absolute;
+	top : 0px;
+	left: 0px;
+	width: 10%;
+	height: 100%;
+	margin : 0px;
+}
+div.top-template  ul.link-menu
+{      
+	position:  absolute;
+	top : 0;
+	right: 150px;
+	margin: 0px;
+	height: 100%;
+}
+div.top-template  .link-menu li
+{
+	display: inline-block;
+	height: 100%;
+	text-align: center;
+	margin-left: 40px;
+
+}
+
+div.top-template  .link-menu li a {
+	display: inline-block;
+	color: rgb(47, 47, 47);
+	text-align: center;
+	text-decoration: none;
+	margin-top: 50%;
+	margin-bottom: 50%;
+  }
+
+ul.main-menu {
+	list-style-type: none;
+	position: relative;
+	margin: 0;
+	background-color: #fafafaf8;
+  }
+  
+ul.main-menu  li {
+	  display: inline-block;
+	  position: relative;
+	  margin-left:60px;
+
+  }
+ul.main-menu  li:nth-child(1) {
+	display: inline-block;
+	position: relative;
+	margin-left:250px;
+}
+ul.main-menu  li a {
+	display: inline-block;
+	color: rgb(47, 47, 47);
+	text-align: center;
+	margin: 14px 16px;
+	text-decoration: none;
+  }
+
+ul.main-menu li a:hover,div.top-template  .link-menu li a:hover {
+	color: #37a000;
+  }

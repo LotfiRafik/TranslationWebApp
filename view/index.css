@@ -1,0 +1,12 @@
+.right_zone
+{
+	position: relative;
+	width: 50%;
+	float: right;
+}
+.left_zone
+{
+	position: relative;
+	width: 50%;
+	float: left;
+}
