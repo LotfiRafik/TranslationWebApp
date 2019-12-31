@@ -1,11 +1,13 @@
 .right_zone
 {
+	border-radius: 8px;
 	position: relative;
 	width: 50%;
 	float: right;
 }
 .left_zone
 {
+	border-radius: 8px;
 	position: relative;
 	width: 50%;
 	float: left;
