@@ -1,5 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
-
 .profile 
 {
     display: inline-block;
@@ -10,7 +8,7 @@
 }
 .well
 {
-    background-color: white;
+    background-color: white !important;
 }
 
 figcaption.ratings
@@ -52,42 +50,3 @@ span.tags
     padding: 2px 4px;
     }
 
-    * {
-        box-sizing: border-box;
-      }
-      
-      /* Style the search field */
-      form.example input[type=text] {
-        position: relative;
-        padding: 10px;
-        font-size: 17px;
-        border: 1px solid grey;
-        width: 40%;
-        background: #f1f1f1;
-        left: 25%;
-      }
-      
-      /* Style the submit button */
-      form.example button {
-        position: relative;
-        width: 10%;
-        padding: 10px;
-        background: #2196F3;
-        color: white;
-        font-size: 17px;
-        border: 1px solid grey;
-        border-left: none; /* Prevent double borders */
-        cursor: pointer;
-        left: 24%;
-      }
-      
-      form.example button:hover {
-        background: #0b7dda;
-      }
-      
-      /* Clear floats */
-      form.example::after {
-        content: "";
-        clear: both;
-        display: table;
-      }

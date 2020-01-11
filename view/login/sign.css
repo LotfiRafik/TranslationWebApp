@@ -17,7 +17,6 @@ form.sign-content {
 	background-color: #4CAF50;
 	color: white;
 	padding: 14px 20px;
-	margin: 8px 0;
 	cursor: pointer;
 	width: 100%;
 	border-radius: 8px;
@@ -48,6 +47,8 @@ button.sign-cancelbtn {
   /* Add padding to containers */
   .sign-container {
 	padding: 16px;
+	box-shadow:5px black;
+
   }
 
   /* The "Forgot password" text */

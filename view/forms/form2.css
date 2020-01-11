@@ -5,6 +5,8 @@
 	background-color:white;
 	border-radius: 8px;
 	font-family: "Times New Roman";
+	border : 0.5px solid #75da3e;
+
 }
 .form-style-5 label {
 	display: block;
@@ -22,8 +24,7 @@
 .form-style-5 textarea,
 .form-style-5 select {
 	font-family: "Times New Roman";
-	background: rgba(255,255,255,.1);
-	border: none;
+	background: rgba(255, 0, 0, 0.1);
 	border-radius: 4px;
 	font-size: 15px;
 	margin: 0;

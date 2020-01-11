@@ -1,9 +1,11 @@
-<link href="view/profiles/profiles.css" rel="stylesheet">	
+<link href="view/profiles/profiles.css" rel="stylesheet">
+<link href="view/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="view/css/font-awesome.min.css" rel="stylesheet">
 	<div class="container">
 				<div class="row">
 					<div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
 					<?php
-					foreach ($array as $t) {
+					foreach ($data as $t) {
 					?>
 					 <div class="well profile">
 						<div class="col-sm-12">
@@ -56,8 +58,9 @@
 							<div class="col-xs-12 col-sm-4 emphasis">
 								<h2><strong>245</strong></h2>                    
 								<p><small>Moyenne des<br>notes</small></p>
-								<a href="edit_profile.html" style="text-decoration: none;">
-									<button class="btn btn-info btn-block"><span class="fa fa-user"></span> Consulter Profile </button>
+								<a href="?p=traducteurprofile&id=<?php echo $t->id;?>" style="text-decoration: none;">
+									<button class="btn btn-info btn-block">
+									<span class="fa fa-user"></span> Voir Profile</button>
 								</a>
 							</div>
 							<div class="col-xs-12 col-sm-4 emphasis">
@@ -72,3 +75,5 @@
 					</div>
 				</div>
 			</div>
+</body>
+</html>

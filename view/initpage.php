@@ -1,9 +1,9 @@
-<div class="zone">
+<div class="zone" style="hight:100%;width:100%;">
 		<div class="right_zone">
 			<button class="signbtn" onclick="document.getElementById('login').style.display='block'">Login</button>
 			<button class="signbtn" onclick="document.getElementById('signup').style.display='block'">Sign-Up</button>
 			<?php
-				if(isset($error))
+				if(isset($error['login']))
 				echo '<div id="login" class="sign" style="display:block" >';
 				else
 				echo '<div id="login" class="sign">';
@@ -22,7 +22,7 @@
 							<input type="radio" name="type" value="traducteur">  Traducteur 
 						</label>
 						<?php
-							if(isset($error))
+							if(isset($error['login']))
 							echo '<label><b>Email et/ou Mot de passe incorrect :</b></label>';
 						?>
 						<button type="submit">Login</button>
@@ -37,7 +37,7 @@
 				</form>
 			</div>
 			<?php
-				if(isset($sign_error))
+				if(isset($error['signup']))
 				echo '<div id="signup" class="sign" style="display:block">';
 				else
 				echo '<div id="signup" class="sign">';
@@ -59,7 +59,7 @@
 							<input type="radio" name="type" value="traducteur"> Traducteur 
 						</label>
 						<?php
-							if(isset($sign_error))
+							if(isset($error['signup']))
 							echo '<label><b>Email existe déja ! </b></label>';
 						?>			
 						<p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
@@ -72,11 +72,7 @@
 			<div class="form-style-5">
 				<form>
 					<h1>Demande de traduction :</h1>
-					<input type="text" name="nom" placeholder="Votre nom *">
-					<input type="text" name="prenom" placeholder="Votre prenom*">
-					<input type="email" name="email" placeholder="Votre email *">
-					<input type="text" name="tel" placeholder="Votre numero de telephone *">
-					<input type="text" name="adresse" placeholder="Votre adresse">	
+					
 					<input type="text" name="langueo" placeholder="Langue d'origine des documents*">
 					<input type="text" name="languec" placeholder="Langue cible*">
 					<label for="job">Type de traduction souhaité:</label>
@@ -98,17 +94,17 @@
 		</div>
 
 		<div class="left_zone">
-            <div class="blog" style="position: relative;left: 25px;">
+            <div class="blog" style="position: relative;left: 25px;top:76px;">
 			<div class="container">
 					<div class="row">
-						<div class="col-md-9">
+						<div class="col-md-4">
 							<div class="row">
 								<div class="col-md-12 post" style="background-color:white;	border-radius: 8px;
 								">
 									<div class="row">
 										<div class="col-md-12">
 											<h4>
-												<strong><a href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html" class="post-title">Cool Share Button Effects Styles</a></strong></h4>
+												<strong><a href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html" class="post-title">Titre article 1</a></strong></h4>
 										</div>
 									</div>
 									<div class="row">
@@ -125,12 +121,10 @@
 								
 										<div class="col-md-9">
 											<p>
-												Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option.
-												Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari
-												conclusionemque, ad nobis propriae quaerendum sea.
+												Article 1
 											</p>
-											<p>
-												<a class="btn btn-read-more" href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html">Read more</a></p>
+											<p >
+												<a class="btn btn-read-more" href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html">Lire plus</a></p>
 										</div>
 									</div>
 								</div>
@@ -157,9 +151,7 @@
 								
 											<div class="col-md-9">
 												<p>
-													Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option.
-													Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari
-													conclusionemque, ad nobis propriae quaerendum sea.
+												Article 2
 												</p>
 												<p>
 													<a class="btn btn-read-more" href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html">Read more</a></p>
@@ -187,9 +179,7 @@
 		
 												<div class="col-md-9">
 													<p>
-														Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option.
-														Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari
-														conclusionemque, ad nobis propriae quaerendum sea.
+														Article 3
 													</p>
 													<p>
 														<a class="btn btn-read-more" href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html">Read more</a></p>

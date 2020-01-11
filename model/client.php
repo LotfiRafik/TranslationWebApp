@@ -9,7 +9,7 @@ class client extends \core\model\table{
 	protected $db;
 
 	public function __construct(){
-		$db = new database("projetweb");
+		$db = new database();
 		$this->db = $db;
 	}
 	
@@ -40,8 +40,7 @@ class client extends \core\model\table{
 	public function ajouter($array=[])		//Ajout d'un new compte 'email password '
 	{
 		$this->insert($array);
-		$data = $this->listec(array('email' =>$array['email']));
-		return $data[0]; //return the id of the inserted row 
+		return $this->db->lastInsertId();
 	}
 
 

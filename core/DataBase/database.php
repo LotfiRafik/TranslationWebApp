@@ -11,7 +11,7 @@ class dataBase{
     private $db_pass;
     private $pdo;
 
-    public function __construct($db_name,$db_host='localhost',$db_user='root',$db_pass='')
+    public function __construct($db_name="web_project_2cs",$db_host='localhost',$db_user='root',$db_pass='')
     {
     	$this->db_name=$db_name;
     	$this->db_host=$db_host;
@@ -19,7 +19,7 @@ class dataBase{
     	$this->db_pass=$db_pass;
     	$this->pdo=$this->getPdo();
     }
-    public function getPdo()
+    private function getPdo()
     {
     	if(is_null($this->pdo))
     	{
@@ -31,7 +31,7 @@ class dataBase{
 
     public function query($statement)
     {
-     $query=$this->getPdo()->query($statement);
+     $query=$this->pdo->query($statement);
      $result=$query->fetchAll(PDO::FETCH_OBJ);
 
      if(!empty($result))
@@ -43,7 +43,7 @@ class dataBase{
 
     public function prepare($statement,$argument)
     {
-    	$query=$this->getPdo()->prepare($statement);
+    	$query=$this->pdo->prepare($statement);
     	$query->execute($argument);
         if(strpos($statement,'UPDATE')!==0   AND strpos ($statement,'INSERT')!==0 AND strpos($statement,'DELETE')!==0)
         {
@@ -56,4 +56,9 @@ class dataBase{
         }
     }
 
-	}
+    public function lastInsertId()
+    {
+        return $this->pdo->lastInsertId();
+    }
+
+}

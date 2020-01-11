@@ -3,6 +3,7 @@
 	border-radius: 8px;
 	position: relative;
 	width: 50%;
+	height: 100%;
 	float: right;
 }
 .left_zone
@@ -10,5 +11,6 @@
 	border-radius: 8px;
 	position: relative;
 	width: 50%;
+	height: 100%;
 	float: left;
 }

@@ -10,6 +10,7 @@ class Authcontroleur extends \core\Controller\controller {
 
 	public function connexion()
 	{
+		$error = null;
 		if(!empty($_POST) AND isset($_POST))		//Si l'utilisateur a rempli les informations
 		{
 			switch($_POST['type'])
@@ -36,10 +37,10 @@ class Authcontroleur extends \core\Controller\controller {
 			}
 			else 					//sinon
 			{
-				$error = true;
+				$error['login'] = true;
 			}
 		}
-		$this->render('initpage');
+		$this->render('initpage',null,$error);
 	}
 
 
@@ -47,7 +48,8 @@ class Authcontroleur extends \core\Controller\controller {
 
 	public function signup()
 	{
-		if(!empty($_POST))
+		$error = null;
+		if(isset($_POST) && !empty($_POST))
 		{
 			switch($_POST['type'])
 			{
@@ -64,12 +66,10 @@ class Authcontroleur extends \core\Controller\controller {
 		    $data = $user->listec(array('email'=>$_POST['email']));
 		    if($data)
 		    {
-				$sign_error['exist'] = 'exist';
+				$error['signup'] = true;
+				$this->render('initpage',null,$error);;
+
 		    }
-			if(isset($sign_error))	
-			{
-				$this->render('initpage');;
-			}
 			else 					//Sinon on ajoute le compte dans la table client/traducteur
 			{
 				$data = $user->ajouter(array('email'=>$_POST['email'],'password'=>$_POST['password']));
@@ -89,25 +89,12 @@ class Authcontroleur extends \core\Controller\controller {
 	/*
 		la page d'acceuil du site selon le type d'utilisateur 
 	*/
-	public function home()
-	 {
-		switch($_SESSION['type'])
-		{
-			case 'client':
-				$this->render('client/home');
-			break;
-			case 'traducteur':
-				$this->render('traducteur/home');
-			break;
-			default :
-			$this->render('error');		
-		}
-	 }
+
 
 	 public function deconnexion()
 	 {
 	 	session_destroy();
-	 	header('location:?p=connexion');
+	 	header('location:?p=home');
 	 }
 
 

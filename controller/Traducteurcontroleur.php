@@ -13,4 +13,12 @@ class Traducteurcontroleur extends \core\Controller\controller {
 		$this->render('profiles/profiles',$liste);
 	}
 
+	public function profile($id)
+	{
+		$array['id'] = $id;
+		$traducteur = new traducteur();
+		$data = $traducteur->listec($array);
+		$this->render('profiles/traducteur_profile',$data);
+	}
+
 }

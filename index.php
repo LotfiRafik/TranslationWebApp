@@ -14,7 +14,7 @@ if(isset($_GET['p']))
     $p  =  $_GET['p'];
   }
 else {
-   $p = "initpage"; //page d'acceuil du site
+   $p = "home"; //page d'acceuil du site
 }
 
 //---------------------------------------------------------------------------//
@@ -25,6 +25,14 @@ switch ($p)
     $Traducteurcontroleur = new Traducteurcontroleur();     //Liste des traducteurs
     $Traducteurcontroleur->liste();
     break;
+  case 'home':
+    $Authcontroleur = new Authcontroleur();     //Page d'acceuil
+    $Authcontroleur->home();
+  break;
+  case 'traducteurprofile':
+    $Traducteurcontroleur = new Traducteurcontroleur();     //Profile traducteur
+    $Traducteurcontroleur->profile($_GET['id']);
+  break;
 }
 
 /*  Fonctionnalités des membres authentifiés */
@@ -32,6 +40,10 @@ if(isset($_SESSION['id']))
 {
   switch ($p)
   {
+    case 'reqdevis':
+    	$Clientcontroleur = new Clientcontroleur();
+     	$Clientcontroleur->demanderDevis();
+      break; 
     case 'deconnexion':
     	$Authcontroleur = new Authcontroleur();
      	$Authcontroleur->deconnexion();
@@ -53,8 +65,12 @@ else
       $Authcontroleur = new Authcontroleur();     //S'inscrire 
       $Authcontroleur->signup();
       break;
-    default:
+    case 'connexion':
       $Authcontroleur = new Authcontroleur();     //Se connecter
       $Authcontroleur->connexion();
+    //-----------------
+    default:
+      $Authcontroleur = new Authcontroleur();
+      $Authcontroleur->home();
   }
 }
