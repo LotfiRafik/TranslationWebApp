@@ -3,11 +3,10 @@ session_start();
 require 'Autoloader.php';
 Autoloader::register();
 
+use core\Controller\controller;
 use controller\Authcontroleur;
 use controller\Clientcontroleur;
 use controller\Traducteurcontroleur;
-
-
 
 if(isset($_GET['p']))
   {
@@ -21,17 +20,20 @@ else {
 /*  Fonctionnalités de tout les membres  */
 switch ($p)  
 {
-  case 'traducteurlist':
-    $Traducteurcontroleur = new Traducteurcontroleur();     //Liste des traducteurs
+  case 'traducteurlist': //Liste des traducteurs
+    $Traducteurcontroleur = new Traducteurcontroleur();     
     $Traducteurcontroleur->liste();
+    exit(0);
     break;
-  case 'home':
-    $Authcontroleur = new Authcontroleur();     //Page d'acceuil
-    $Authcontroleur->home();
+  case 'home': //Page d'acceuil
+    $Controller = new Controller();     
+    $Controller->home();
+    exit(0);
   break;
   case 'traducteurprofile':
     $Traducteurcontroleur = new Traducteurcontroleur();     //Profile traducteur
     $Traducteurcontroleur->profile($_GET['id']);
+    exit(0);
   break;
 }
 
@@ -40,20 +42,44 @@ if(isset($_SESSION['id']))
 {
   switch ($p)
   {
-    case 'reqdevis':
-    	$Clientcontroleur = new Clientcontroleur();
-     	$Clientcontroleur->demanderDevis();
+    case 'addTradDevis':
+        $Clientcontroleur = new Clientcontroleur();
+        $Clientcontroleur->ajouterTraducteurDevis();
       break; 
+    case 'devis':
+        $Clientcontroleur = new Clientcontroleur();
+        $Clientcontroleur->echoDevis($_GET['id']);
+      break;
+    case 'sendTraduction':
+      $Traducteurcontroleur = new Traducteurcontroleur();
+      $Traducteurcontroleur->rendreTraduction();
+      break;
+    case 'noteTrad':
+        $Clientcontroleur = new Clientcontroleur();
+        $Clientcontroleur->noterTraduction();
+       break; 
+    case 'reqdevis':
+    	 $Clientcontroleur = new Clientcontroleur();
+       $Clientcontroleur->demanderDevis();
+      break; 
+    case 'addDemandeTrad':
+        $Clientcontroleur = new Clientcontroleur();
+        $Clientcontroleur->ajouterDemandeTrad();
+      break;
+    case 'addOffreDevis':
+        $Traducteurcontroleur = new Traducteurcontroleur();
+        $Traducteurcontroleur->ajouterOffre();
+      break;
     case 'deconnexion':
     	$Authcontroleur = new Authcontroleur();
      	$Authcontroleur->deconnexion();
       break;
     //-----------------
     default:
-      $Authcontroleur = new Authcontroleur();
-      $Authcontroleur->home();
+      $Controller = new Controller();     //Page d'acceuil
+      $Controller->home();
   }
-}
+} 
 
 /*  Fonctionnalités des membres non authentifiés */
 
@@ -70,7 +96,7 @@ else
       $Authcontroleur->connexion();
     //-----------------
     default:
-      $Authcontroleur = new Authcontroleur();
-      $Authcontroleur->home();
+      $Controller = new Controller();     //Page d'acceuil
+      $Controller->home();
   }
 }

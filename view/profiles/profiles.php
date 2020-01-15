@@ -11,10 +11,10 @@
 						<div class="col-sm-12">
 							<div class="col-xs-12 col-sm-8">
 								<h2 style="margin-bottom: 0;" >
-									<?php echo $t->lastname." ".$t->firstname; ?>
+									<?php echo $t['lastname']." ".$t['firstname']; ?>
 								</h2>
 								<p><strong>
-									<?php echo $t->wilaya." ".$t->commune;?>
+									<?php echo $t['wilaya']." ".$t['commune'];?>
 									</strong></p>
 								<p><strong>About: </strong>
 									Web Designer / UI.Read, out with friends, listen to musi.
@@ -58,7 +58,7 @@
 							<div class="col-xs-12 col-sm-4 emphasis">
 								<h2><strong>245</strong></h2>                    
 								<p><small>Moyenne des<br>notes</small></p>
-								<a href="?p=traducteurprofile&id=<?php echo $t->id;?>" style="text-decoration: none;">
+								<a href="?p=traducteurprofile&id=<?php echo $t['id'];?>" style="text-decoration: none;">
 									<button class="btn btn-info btn-block">
 									<span class="fa fa-user"></span> Voir Profile</button>
 								</a>

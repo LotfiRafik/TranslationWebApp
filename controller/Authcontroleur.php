@@ -27,11 +27,11 @@ class Authcontroleur extends \core\Controller\controller {
 			$data = $user->connexion(array('email'=>$_POST['email'],'password'=>$_POST['password']));
 			if($data)					//Si les infos rempli sont juste
 			{
-				$_SESSION['id'] = $data->id;
-				$_SESSION['firstname'] = $data->firstname;
-				$_SESSION['lastname'] = $data->lastname;
-				$_SESSION['email'] = $data->email;
-				$_SESSION['password'] = $data->password;
+				$_SESSION['id'] = $data['id'];
+				$_SESSION['firstname'] = $data['firstname'];
+				$_SESSION['lastname'] = $data['lastname'];
+				$_SESSION['email'] = $data['email'];
+				$_SESSION['password'] = $data['password'];
 				$_SESSION['type'] = $_POST['type'];
 				$this->home();
 			}
@@ -86,15 +86,10 @@ class Authcontroleur extends \core\Controller\controller {
 	    }
 	}
 
-	/*
-		la page d'acceuil du site selon le type d'utilisateur 
-	*/
-
-
 	 public function deconnexion()
 	 {
-	 	session_destroy();
-	 	header('location:?p=home');
+		 session_destroy();
+		 $this->render('initpage');
 	 }
 
 

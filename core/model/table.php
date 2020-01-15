@@ -46,21 +46,25 @@ class table
         return ($this->db->prepare($statement,$arguments));
     }
 
-    public function update($array=[],$id)
+        
+    public function update($array=[],$array2=[])
     {
-
-        $sql_parts=[];
-        $arguments=[];
         $i = 0;
         foreach($array as $k=>$v)
         {
-            $sql_parts[$i]= $k.'=?';
+            $sql_parts1[$i]= $k.'=?';
             $arguments[$i]=$v;
             $i++;
         }
-        $arguments[$i]=$id;
-        $a = implode(",",$sql_parts);
-        $statement = 'UPDATE '.$this->table.' SET ' .$a. ' WHERE id=?';
+        foreach($array2 as $k=>$v)
+        {
+            $sql_parts2[$i]= $k.'=?';
+            $arguments[$i]=$v;
+            $i++;
+        }
+        $a = implode(",",$sql_parts1);
+        $b = implode(" and ",$sql_parts2);
+        $statement = 'UPDATE '.$this->table.' SET ' .$a. ' WHERE '.$b;
         $this->db->prepare($statement,$arguments);
     }
 

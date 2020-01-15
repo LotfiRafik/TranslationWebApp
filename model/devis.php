@@ -13,11 +13,17 @@ class devis extends \core\model\table{
 		$this->db = $db;
     }
     
+    public function listec($array=[])
+	{
+		$data = $this->select($array);
+		return $data;
+    }
+    
     public function getAll()
     {
-        $data = $this->db->query('SELECT * FROM '.$this->table);
+        $listDevis = $this->db->query('SELECT * FROM '.$this->table);
 		//DATA TABLEAU D'OBJETS
-		return $data;
+		return $listDevis;
     }
 
     /*

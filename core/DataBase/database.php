@@ -32,7 +32,7 @@ class dataBase{
     public function query($statement)
     {
      $query=$this->pdo->query($statement);
-     $result=$query->fetchAll(PDO::FETCH_OBJ);
+     $result=$query->fetchAll(PDO::FETCH_ASSOC);
 
      if(!empty($result))
      {
@@ -47,7 +47,7 @@ class dataBase{
     	$query->execute($argument);
         if(strpos($statement,'UPDATE')!==0   AND strpos ($statement,'INSERT')!==0 AND strpos($statement,'DELETE')!==0)
         {
-            $result=$query->fetchAll(PDO::FETCH_OBJ);
+            $result=$query->fetchAll(PDO::FETCH_ASSOC);
              if(!empty($result))
              {
                 return $result;

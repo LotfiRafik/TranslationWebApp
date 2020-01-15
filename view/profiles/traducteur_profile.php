@@ -9,10 +9,10 @@
 							<div class="col-sm-12">
 								<div class="col-xs-12 col-sm-8">
 									<h2 style="margin-bottom: 0;" >
-										<?php echo $data[0]->lastname." ".$data[0]->firstname; ?>
+										<?php echo $data[0]['lastname']." ".$data[0]['firstname']; ?>
 									</h2>
 									<p><strong>
-										<?php echo $data[0]->wilaya." ".$data[0]->commune;?>
+										<?php echo $data[0]['wilaya']." ".$data[0]['commune'];?>
 										</strong></p>
 									<p><strong>About: </strong>
 										Web Designer / UI.Read, out with friends, listen to musi.

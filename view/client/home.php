@@ -1,4 +1,5 @@
 <link href="view/forms/form2.css" rel="stylesheet">
+<link href="view/css/tableaustyle.css" rel="stylesheet">
 
 <style>
 	.form-style-5,.traducteurs
@@ -12,20 +13,51 @@
 		overflow: auto; /* Enable scroll if needed */
 		left: 30%;
 	}
-
 </style>
+
 <script type="text/javascript" src="view/js/jquery-3.3.1.js"></script>
 
-		<a href="../profiles/client_profile.html">My Profile</a>
-		<a href="?p=deconnexion">Déconnexion</a>
+		<div class="col-md-11">
+			<a href="../profiles/client_profile.html"><button class="btn btn-lg btn-info">My Profile</button></a>
+			<a href="?p=deconnexion"><button class="btn btn-lg btn-info">Déconnexion</button></a>
+			<button id="addv" class="btn btn-lg btn-info">Nouveau Devis</button>
+			
+			<h3> Liste des Devis</h6>
+			<div class="ttable">
+			<table class="table">
+			<thead  style ="background-color:#5BC0DE;"class="entet">
+			<tr>
+			<th scope="col">Devis ID</th>
+			<th scope="col">Langue Source</th>
+			<th scope="col">Langue Cible</th>
+			<th scope="col">Nombre d'offre</th>
+			<th scope="col">Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+		if($data != false)
+		{
+			foreach ($data['listDevis'] as $devis)
+			{?>
 
-		<br>
-		<button id="addv" >Ajouter une demande de devis de traduction</button>
-		<?php
-			echo '<br>ID : '.$_SESSION['id'];
-			echo ' EMAIL : '.$_SESSION['email'];
-			echo ' TYPE : '.$_SESSION['type'];	
-		?>
+			<tr  onclick="location.href='?p=devis&amp;id=<?php echo $devis['id'] ?>'" style="cursor: pointer ; " class="lien" >
+				<th scope="row"><?php echo $devis['id'] ?></th>
+				<td><?php echo $devis['langue_s'] ?></td>
+				<td><?php echo $devis['langue_d'] ?></td>
+				<td><?php echo 5 ?></td>
+				<td><?php echo $devis['date'] ?></td>
+			</tr>
+			<?php
+			}
+		}
+			?>
+		</tbody>
+		</table>
+		</div>
+		<div class="col-md-10">
+
+
 		<div id="ddt-form" class="form-style-5">
 				<form id="devis_form" method="post" action="javascript:void(0)">
 					<h1>Demande de traduction :</h1>
@@ -46,19 +78,19 @@
 					<select name="langue_s">
 					<?php
 						foreach ($langues as $l) {
-							if($l->id === "Arabe")
+							if($l['id'] === "Arabe")
 							{
 							?>
-								<option selected="selected" value='<?php echo $l->id; ?>'>
-								<?php echo $l->id; ?>
+								<option selected="selected" value='<?php echo $l['id']; ?>'>
+								<?php echo $l['id']; ?>
 								</option>
 							<?php
 							}
 							else 
 							{
 							?>
-								<option value='<?php echo $l->id; ?>'>
-								<?php echo $l->id; ?>
+								<option value='<?php echo $l['id']; ?>'>
+								<?php echo $l['id']; ?>
 								</option>
 								<?php
 							}
@@ -69,19 +101,19 @@
 					<select name="langue_d">
 					<?php
 						foreach ($langues as $l) {
-							if($l->id === "Anglais")
+							if($l['id'] === "Anglais")
 							{
 							?>
-								<option selected="selected" value='<?php echo $l->id; ?>'>
-								<?php echo $l->id; ?>
+								<option selected="selected" value='<?php echo $l['id']; ?>'>
+								<?php echo $l['id']; ?>
 								</option>
 							<?php
 							}
 							else 
 							{
 							?>
-								<option value='<?php echo $l->id; ?>'>
-								<?php echo $l->id; ?>
+								<option value='<?php echo $l['id']; ?>'>
+								<?php echo $l['id']; ?>
 								</option>
 								<?php
 							}
@@ -93,8 +125,8 @@
 					<?php
 						foreach ($traduction_types as $type) {
 							?>
-							<option value='<?php echo $type->id; ?>'>
-							<?php echo $type->description; ?>
+							<option value='<?php echo $type['id']; ?>'>
+							<?php echo $type['description']; ?>
 							</option>
 							<?php
 						}
@@ -113,30 +145,21 @@
 			</div>
 
 			<div id="divTraducteurs" class="traducteurs" >
-				<h3>Selectionner les traducteurs que vous voulez:</h3>
+				<form id="trad_checklist_form" method="post" action="?p=addTradDevis">
+					<h3>Selectionner les traducteurs que vous voulez:</h3>
 					<table id="tableTraducteurs" >
-					<tr>
-						<th>Nom</th>
-						<th>Prenom</th>
-						<th>Email</th>
-					</tr>
+						<tr>
+							<th>Nom</th>
+							<th>Prenom</th>
+							<th>Email</th>
+						</tr>
 					</table>
-				<button type="button" onclick="document.getElementById('divTraducteurs').style.display='none'" >Annuler</button>	
-				<button type="button" id="sendTraducteurs">Envoyez la demande</button>
+					<button type="button" onclick="document.getElementById('divTraducteurs').style.display='none'" >Annuler</button>	
+					<button type="button" id="RetourDemandeDevis" >Retour</button>	
+					<button type="submit" id="sendTraducteurs">Envoyez la demande</button>
+				</form>	
 			</div>
 
-	
-				
-
-
-<script type="text/javascript">
-	$(document).ready(function(){
-
-		$("#addv").click(function(){
-			$("#ddt-form").show();
-		});
 		
-    });
-    
-</script>
-<script type="text/javascript" src="view/js/modal_post.js"></script>
+				
+<script type="text/javascript" src="view/js/client_home.js"></script>
