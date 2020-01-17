@@ -11,6 +11,46 @@ use model\demandeTraduction;
 
 class Clientcontroleur extends \core\Controller\controller {
 
+
+    public function downloadDevis($devis_id){
+        $devis = new devis();
+        $filepath = $devis->listec(array("id" => $devis_id))[0]['file_path'];
+        $filename = "Devis_".$devis_id.".pdf";
+        if(file_exists($filepath))
+        {
+            ob_start();
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename='.$filename.''); //Nom du fichier
+            ob_clean();
+            readfile($filepath);
+        }
+        else
+        {
+            $this->render('error');
+        }
+    }
+    public function downloadTraduction($devis_id,$traducteur_id){
+        $traduction = new traduction();
+        $traductionRow = $traduction->listec(array("devis_id" => $devis_id,"traducteur_id" => $traducteur_id));
+        $filepath = $traductionRow[0]['file_path'];
+        $traducteur = new traducteur();
+        $traducteur_info = $traducteur->listec(array("id" => $traducteur_id))[0];
+        $filename = "Traduction".$traducteur_info['lastname']."-".$traducteur_info['firstname'].".pdf";
+        if(file_exists($filepath))
+        {
+            ob_start();
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename='.$filename.''); //Nom du fichier
+            ob_clean();
+            readfile($filepath);
+        }
+        else
+        {
+            $this->render('error');
+        }
+    }
     
     public function noterTraduction()
     {
@@ -45,7 +85,7 @@ class Clientcontroleur extends \core\Controller\controller {
             $array['traducteur_id'] = $id;
             $devisTraducteur->ajouter($array);
         }
-        $this->home();
+        $this->echoDevis($array['devis_id']);
     }
 
 
@@ -54,7 +94,7 @@ class Clientcontroleur extends \core\Controller\controller {
         if(isset($_POST) && !empty($_POST))
 		{
             //Insertion du devis dans la base de donnée
-            $devis = new devis();
+          /*  $devis = new devis();
             $_POST['client_id'] = $_SESSION['id'];
             $devis_id = $devis->ajouter($_POST);
             //uploader le fichier du devis
@@ -67,15 +107,26 @@ class Clientcontroleur extends \core\Controller\controller {
             }
             //Inserer le chemin du fichier dans la table devis
             $devis->update(array('file_path' => $dest),array('id' => $devis_id));    
-        }
+        }*/
         //retourner les traducteurs qui correspond aux critéres
+    }
         $traducteur = new traducteur();
         if(!isset($_POST['assermente'])) $_POST['assermente'] = 0;
         $list_traducteur = $traducteur->filterTraducteur($_POST['langue_s'],$_POST['langue_d'],$_POST['assermente']);
-        $devisArray['devis_id'] = $devis_id;
+        $devisArray['devis_id'] = 5;
         $list['traducteurs'] = $list_traducteur;
         echo json_encode(array_merge($devisArray,$list));
 
+      
+    }
+
+    public function getTraducteurDispo()
+    {
+        $devis = new devis();
+        $devisInfo = $devis->listec(array("id" => $_POST['devis_id']))[0];
+        $traducteur = new traducteur();
+        $list_traducteur_dispo = $traducteur->filterTraducteur($devisInfo['langue_s'],$devisInfo['langue_d'],$devisInfo['assermente']);
+        echo json_encode($list_traducteur_dispo);
     }
 
     public function echoDevis($devis_id)
@@ -84,23 +135,31 @@ class Clientcontroleur extends \core\Controller\controller {
         $i=0;
         $devis = new devis();
         $devisTraducteur = new devisTraducteur();
+        $demandeTraduction = new demandeTraduction();
         $traducteur = new traducteur();
         $offre = new offre();
         $traduction = new traduction();
         $devis = $devis->listec(array("id" => $devis_id))[0];
         $listTraducteurId = $devisTraducteur->getAll($devis_id);
-        foreach ($listTraducteurId as $traducteurId)
+        $devis['traducteurs'] = false;
+        if($listTraducteurId)
         {
-            $traducteurInfo = $traducteur->listec(array("id" => $traducteurId['traducteur_id']));
-            $devis['traducteurs'][$i] = $traducteurInfo[0];
-            $offreInfo = $offre->listec(array("traducteur_id" => $traducteurId['traducteur_id'],"devis_id" => $devis_id));
-            $devis['traducteurs'][$i]['offre'] = $offreInfo[0];
-            $traductionInfo = $traduction->listec(array("devis_id" => $devis['id'],"traducteur_id" => $traducteurId['traducteur_id']));
-            $devis['traducteurs'][$i]['traduction'] = $traductionInfo[0];
-            $i++;
+            foreach ($listTraducteurId as $traducteurId)
+            {
+                $demandeInfo = $demandeTraduction->listec(array("devis_id" => $devis['id'],"traducteur_id" => $traducteurId['traducteur_id']));
+                $traducteurInfo = $traducteur->listec(array("id" => $traducteurId['traducteur_id']));
+                $offreInfo = $offre->listec(array("traducteur_id" => $traducteurId['traducteur_id'],"devis_id" => $devis_id));
+                $traductionInfo = $traduction->listec(array("devis_id" => $devis['id'],"traducteur_id" => $traducteurId['traducteur_id']));
+
+                $devis['traducteurs'][$i] = $traducteurInfo[0];
+                $devis['traducteurs'][$i]['demande'] = $demandeInfo[0];
+                $devis['traducteurs'][$i]['offre'] = $offreInfo[0];
+                $devis['traducteurs'][$i]['traduction'] = $traductionInfo[0];
+                $i++;
+            }
         }
         $data['devis'] = $devis;
-        $this->render('client/devis',$data);		//page d'acceuil des clients
+        $this->render('client/devis',$data);		//page devis 
 
     }
 

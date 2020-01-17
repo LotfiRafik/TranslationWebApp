@@ -14,9 +14,9 @@ class devis extends \core\model\table{
     }
     
     public function listec($array=[])
-	{
-		$data = $this->select($array);
-		return $data;
+	  {
+		  $data = $this->select($array);
+		  return $data;
     }
     
     public function getAll()

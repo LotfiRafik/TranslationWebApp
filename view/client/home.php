@@ -30,6 +30,7 @@
 			<th scope="col">Devis ID</th>
 			<th scope="col">Langue Source</th>
 			<th scope="col">Langue Cible</th>
+			<th scope="col">Nombre Traducteurs Disponibles</th>
 			<th scope="col">Nombre d'offre</th>
 			<th scope="col">Date</th>
 			</tr>
@@ -45,7 +46,8 @@
 				<th scope="row"><?php echo $devis['id'] ?></th>
 				<td><?php echo $devis['langue_s'] ?></td>
 				<td><?php echo $devis['langue_d'] ?></td>
-				<td><?php echo 5 ?></td>
+				<td><?php echo $devis['nb_traducteurs_dispo'] ?></td>
+				<td><?php echo $devis['nb_offre']  ?></td>
 				<td><?php echo $devis['date'] ?></td>
 			</tr>
 			<?php
@@ -61,69 +63,46 @@
 		<div id="ddt-form" class="form-style-5">
 				<form id="devis_form" method="post" action="javascript:void(0)">
 					<h1>Demande de traduction :</h1>
-					<input type="text" name="nom" placeholder="Votre nom *">
-					<input type="text" name="prenom" placeholder="Votre prenom*">
-					<input type="email" name="email" placeholder="Votre email *">
-					<input type="text" name="tel" placeholder="Votre numero de telephone *">
-					<input type="text" name="adresse" placeholder="Votre adresse">
-					<?php
-						use model\type_traduction;
-						use model\langue;
-						$type_traduction = new type_traduction();
-						$traduction_types = $type_traduction->getTypeDispo();
-						$langue = new langue();
-						$langues = $langue->getAll();
-					?>
+					<label for="job">Nom:</label>
+					<input required type="text" name="nom" value=<?php echo $_SESSION['lastname']?>>
+					<label for="job">Prénom:</label>
+					<input required type="text" name="prenom" value=<?php echo $_SESSION['firstname']?>>
+					<label for="job">Email:</label>
+					<input required type="email" name="email" value=<?php echo $_SESSION['email']?>>
+					<label for="job">Téléphone:</label>
+					<input required type="text" name="tel" value=<?php echo $_SESSION['telephone']?>>
+					<label for="job">Adresse:</label>
+					<input required type="text" name="adresse" value=<?php echo $_SESSION['adresse']?>>
 					<label for="job">Langue d'origine des documents*:</label>
 					<select name="langue_s">
+					<option selected="selected" value='Arabe'>Arabe</option>
 					<?php
-						foreach ($langues as $l) {
-							if($l['id'] === "Arabe")
-							{
-							?>
-								<option selected="selected" value='<?php echo $l['id']; ?>'>
-								<?php echo $l['id']; ?>
-								</option>
-							<?php
-							}
-							else 
-							{
-							?>
+						foreach ($data['langues'] as $l) {
+								?>
 								<option value='<?php echo $l['id']; ?>'>
 								<?php echo $l['id']; ?>
 								</option>
 								<?php
-							}
 						}
 					?>
 					</select> 
 					<label for="job">Langue cible*:</label>
 					<select name="langue_d">
+						<option selected="selected" value='Anglais'>Anglais</option>
 					<?php
-						foreach ($langues as $l) {
-							if($l['id'] === "Anglais")
-							{
-							?>
-								<option selected="selected" value='<?php echo $l['id']; ?>'>
-								<?php echo $l['id']; ?>
-								</option>
-							<?php
-							}
-							else 
-							{
+						foreach ($data['langues'] as $l) {
 							?>
 								<option value='<?php echo $l['id']; ?>'>
 								<?php echo $l['id']; ?>
 								</option>
 								<?php
-							}
 						}
 					?>
 					</select> 
 					<label for="job">Type de traduction souhaité:</label>
 					<select name="traduction_type">
 					<?php
-						foreach ($traduction_types as $type) {
+						foreach ($data['traduction_types'] as $type) {
 							?>
 							<option value='<?php echo $type['id']; ?>'>
 							<?php echo $type['description']; ?>
@@ -134,7 +113,7 @@
 					</select>    
 					<textarea name="comment" placeholder="Demande spécifique / commentaire ..."></textarea>	
 					<label>Choisir le document a traduire :
-						<input type="file" name="document">
+						<input required type="file" name="document">
 					</label>
 					<label for="assermente"> Traducteur Assermenté :
 						<input type="checkbox" id="assermente" name="assermente" value="1">
@@ -155,7 +134,6 @@
 						</tr>
 					</table>
 					<button type="button" onclick="document.getElementById('divTraducteurs').style.display='none'" >Annuler</button>	
-					<button type="button" id="RetourDemandeDevis" >Retour</button>	
 					<button type="submit" id="sendTraducteurs">Envoyez la demande</button>
 				</form>	
 			</div>

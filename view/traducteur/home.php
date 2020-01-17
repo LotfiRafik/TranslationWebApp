@@ -29,25 +29,37 @@
 			<th scope="col">Langue Source</th>
 			<th scope="col">Langue Cible</th>
 			<th scope="col">Date</th>
+			<th scope="col">Offre soumit</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="devis_table" >
 			<?php
 		if($data != false)
 		{	
-			$i = 0;
 			foreach ($data['listDevis'] as $devis)
 			{
 			?>
-			<tr id="devisRow" style="cursor: pointer ; " class="lien" >
+			<tr style="cursor: pointer ; " class="lien" >
 				<th scope="row"><?php echo $devis['id'] ?></th>
 				<td><?php echo $devis['langue_s'] ?></td>
 				<td><?php echo $devis['langue_d'] ?></td>
 				<td><?php echo $devis['date'] ?></td>
+				<?php
+						if($devis['offre'])
+						{
+					?>
+							<td><i class="glyphicon glyphicon-ok" style="color:green"></i></td>
+					<?php	
+						}
+						else
+						{
+						?>
+							<td><i class="glyphicon glyphicon-remove" style="color:red"></i></td>
+						<?php
+						}
+					?>
 			</tr>
-			<input type="hidden" id="devisRowNum" value="<?php echo $i;?>">
 			<?php
-			$i++;
 			}
 		}
 			?>
@@ -62,38 +74,42 @@
 			?>
 			<div class="infoDevis" id="infoDevis<?php echo $i?>">
 					<h3>Informations Devis</h3>
-					<input type="text" readonly placeholder="<?php echo $devis['nom'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis['prenom'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis['email'] ?>"><br>
-					<input type="text" readonly placeholder="<?php echo $devis['tel'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis ['adresse'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis ['langue_s'] ?>"><br>
-					<input type="text" readonly placeholder="<?php echo $devis ['langue_d'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis ['traduction_type'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis ['assermente'] ?>"><br>
-					<input type="text" readonly placeholder="<?php echo $devis ['comment'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis ['date'] ?>"><br><br><br>
+					Nom:<input type="text" readonly placeholder="<?php echo $devis['nom'] ?>">
+					Prenom:<input type="text" readonly placeholder="<?php echo $devis['prenom'] ?>">
+					Email:<input type="text" readonly placeholder="<?php echo $devis['email'] ?>"><br>
+					Téléphone:<input type="text" readonly placeholder="<?php echo $devis['tel'] ?>">
+					Adresse:<input type="text" readonly placeholder="<?php echo $devis ['adresse'] ?>">
+					Langue Source:<input type="text" readonly placeholder="<?php echo $devis ['langue_s'] ?>"><br>
+					Langue Cible:<input type="text" readonly placeholder="<?php echo $devis ['langue_d'] ?>">
+					Type Traduction:<input type="text" readonly placeholder="<?php echo $devis ['traduction_type'] ?>">
+					Assermente:<input type="text" readonly placeholder="<?php echo $devis ['assermente'] ?>"><br>
+					Commentaire:<input type="text" readonly placeholder="<?php echo $devis ['comment'] ?>">
+					Date:<input type="text" readonly placeholder="<?php echo $devis ['date'] ?>">
+					<a target="_blank" href="?p=downDevis&did=<?php echo $devis['id']?>">Document A Traduire</a>
+					<br><br><br>
 					<?php
 						if($devis['offre'])
 						{?>
-							<h3>L'offre soumit a cet devis:</h3>	
-							Prix:<input type="text" readonly placeholder="<?php echo $devis['offre']['prix'] ?>">
+							<h3>L'offre soumit a cet devis:</h3>
+							Prix en dinar algérien:<input type="number" readonly placeholder="<?php echo $devis['offre']['prix'] ?>">
 							Date:<input type="text" readonly placeholder="<?php echo $devis['offre']['date'] ?>"><br>
 						<?php
 						}
 						else{
 						?>
 							<form  id="sendOffre" method="post" action="?p=addOffreDevis">
-								Prix<input type="text" name="prix" required>
+								Prix en dinar algérien:<input type="number" name="prix" min="50" required> 
+								(L'offre minimal est a 50 DZD)
 								<input type="hidden" name="devis_id" value=<?php echo $devis['id']?>>
 								<input type="submit" value="Envoyer l'offre " />				
 							</form>
 						<?php
 						}
 						?>
-					<button id="retourOffre">Retour</button>
+					<button class="retourOffre">Retour</button>
 			</div>
 			<?php
+			$i++;
 			}
 			?>
 
@@ -111,39 +127,36 @@
 			<th scope="col">Traité</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="demande_table">
 			<?php
-		if($data != false)
+		if($data['listDevis'] != false)
 		{	
-			$i = 0;
 			foreach ($data['listDevis'] as $devis)
 			{
 				if($devis['demandeTrad'])
 				{
-			?>
-			<tr id="demandeRow" style="cursor: pointer ; " class="lien" >
-				<th scope="row"><?php echo $devis['id'] ?></th>
-				<td><?php echo $devis['langue_s'] ?></td>
-				<td><?php echo $devis['langue_d'] ?></td>
-				<td><?php echo $devis['date'] ?></td>
-			<?php
-				if($devis['traduction'])
-				{
-			?>
-					<td><i class="glyphicon glyphicon-ok" style="color:green"></i></td>
-			<?php	
-				}
-				else
-				{
-				?>
-					<td><i class="glyphicon glyphicon-remove" style="color:red"></i></td>
-				<?php
-				}
-			?>
-			</tr>
-			<input type="hidden" id="demandeRowNum" value="<?php echo $i;?>">
-			<?php
-				$i++;
+					?>
+					<tr style="cursor: pointer ; " class="lien" >
+						<th scope="row"><?php echo $devis['id'] ?></th>
+						<td><?php echo $devis['langue_s'] ?></td>
+						<td><?php echo $devis['langue_d'] ?></td>
+						<td><?php echo $devis['date'] ?></td>
+					<?php
+						if($devis['traduction'])
+						{
+					?>
+							<td><i class="glyphicon glyphicon-ok" style="color:green"></i></td>
+					<?php	
+						}
+						else
+						{
+						?>
+							<td><i class="glyphicon glyphicon-remove" style="color:red"></i></td>
+						<?php
+						}
+					?>
+					</tr>
+					<?php
 				}
 			}
 		}
@@ -161,17 +174,19 @@
 			?>
 			<div class="infoDemande" id="infoDemande<?php echo $i?>">
 					<h3>Informations sur la demande de traduction</h3>
-					<input type="text" readonly placeholder="<?php echo $devis['nom'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis['prenom'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis['email'] ?>"><br>
-					<input type="text" readonly placeholder="<?php echo $devis['tel'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis ['adresse'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis ['langue_s'] ?>"><br>
-					<input type="text" readonly placeholder="<?php echo $devis ['langue_d'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis ['traduction_type'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis ['assermente'] ?>"><br>
-					<input type="text" readonly placeholder="<?php echo $devis ['comment'] ?>">
-					<input type="text" readonly placeholder="<?php echo $devis ['date'] ?>"><br><br><br>	
+					Nom:<input type="text" readonly placeholder="<?php echo $devis['nom'] ?>">
+					Prenom:<input type="text" readonly placeholder="<?php echo $devis['prenom'] ?>">
+					Email:<input type="text" readonly placeholder="<?php echo $devis['email'] ?>"><br>
+					Téléphone:<input type="text" readonly placeholder="<?php echo $devis['tel'] ?>">
+					Adresse:<input type="text" readonly placeholder="<?php echo $devis ['adresse'] ?>">
+					Langue Source:<input type="text" readonly placeholder="<?php echo $devis ['langue_s'] ?>"><br>
+					Langue Cible:<input type="text" readonly placeholder="<?php echo $devis ['langue_d'] ?>">
+					Type Traduction:<input type="text" readonly placeholder="<?php echo $devis ['traduction_type'] ?>">
+					Assermente:<input type="text" readonly placeholder="<?php echo $devis ['assermente'] ?>"><br>
+					Commentaire:<input type="text" readonly placeholder="<?php echo $devis ['comment'] ?>">
+					Date:<input type="text" readonly placeholder="<?php echo $devis ['date'] ?>">
+					<a target="_blank" href="?p=downTrad&did=<?php echo $devis['id']?>">Document Traduit</a>
+					<br><br><br>
 					<?php
 						if($devis['traduction'])
 						{
@@ -190,10 +205,11 @@
 						<?php					
 						}
 					?>
-					<button id="retourDemande">Retour</button>
+					<button class="retourDemande">Retour</button>
 			</div>
 			<?php
 				}
+				$i++;
 			}
 			?>
 

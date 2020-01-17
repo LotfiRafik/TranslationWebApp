@@ -40,45 +40,76 @@ switch ($p)
 /*  Fonctionnalités des membres authentifiés */
 if(isset($_SESSION['id']))			  
 {
-  switch ($p)
-  {
-    case 'addTradDevis':
-        $Clientcontroleur = new Clientcontroleur();
-        $Clientcontroleur->ajouterTraducteurDevis();
-      break; 
-    case 'devis':
-        $Clientcontroleur = new Clientcontroleur();
-        $Clientcontroleur->echoDevis($_GET['id']);
+  switch ($_SESSION['type']) {
+    /*  Fonctionnalités des clients */
+
+    case 'client':
+      $Clientcontroleur = new Clientcontroleur();
+      switch ($p)
+      {
+        case 'addTradDevis':
+            $Clientcontroleur->ajouterTraducteurDevis();
+          break; 
+        case 'devis':
+            $Clientcontroleur->echoDevis($_GET['id']);
+          break; 
+        case 'downTrad':
+            $Clientcontroleur->downloadTraduction($_GET['did'],$_GET['tid']);
+          break;
+        case 'downDevis':
+            $Clientcontroleur->downloadDevis($_GET['did']);
+          break;
+        case 'noteTrad':
+            $Clientcontroleur->noterTraduction();
+           break; 
+        case 'getTrad':
+            $Clientcontroleur->getTraducteurDispo();
+           break; 
+        case 'reqdevis':
+           $Clientcontroleur->demanderDevis();
+          break; 
+        case 'addDemandeTrad':
+            $Clientcontroleur->ajouterDemandeTrad();
+          break;
+        case 'deconnexion':
+          $Authcontroleur = new Authcontroleur();
+           $Authcontroleur->deconnexion();
+          break;
+        //-----------------
+        default:
+          $Controller = new Controller();     //Page d'acceuil
+          $Controller->home();
+      }
       break;
-    case 'sendTraduction':
+    /*  Fonctionnalités des traducteurs */
+    case 'traducteur':
       $Traducteurcontroleur = new Traducteurcontroleur();
-      $Traducteurcontroleur->rendreTraduction();
+      switch ($p)
+      {
+        case 'downTrad':
+          $Traducteurcontroleur->downloadTraduction($_GET['did']);
+        break;
+        case 'downDevis':
+          $Traducteurcontroleur->downloadDevis($_GET['did']);
+        break;
+        case 'sendTraduction':
+            $Traducteurcontroleur->rendreTraduction();
+          break;
+        case 'addOffreDevis':
+            $Traducteurcontroleur->ajouterOffre();
+          break;
+        case 'deconnexion':
+            $Authcontroleur = new Authcontroleur();
+            $Authcontroleur->deconnexion();
+          break;
+        //-----------------
+        default:
+          $Controller = new Controller();     //Page d'acceuil
+          $Controller->home();
+      }
       break;
-    case 'noteTrad':
-        $Clientcontroleur = new Clientcontroleur();
-        $Clientcontroleur->noterTraduction();
-       break; 
-    case 'reqdevis':
-    	 $Clientcontroleur = new Clientcontroleur();
-       $Clientcontroleur->demanderDevis();
-      break; 
-    case 'addDemandeTrad':
-        $Clientcontroleur = new Clientcontroleur();
-        $Clientcontroleur->ajouterDemandeTrad();
-      break;
-    case 'addOffreDevis':
-        $Traducteurcontroleur = new Traducteurcontroleur();
-        $Traducteurcontroleur->ajouterOffre();
-      break;
-    case 'deconnexion':
-    	$Authcontroleur = new Authcontroleur();
-     	$Authcontroleur->deconnexion();
-      break;
-    //-----------------
-    default:
-      $Controller = new Controller();     //Page d'acceuil
-      $Controller->home();
   }
+
 } 
 
 /*  Fonctionnalités des membres non authentifiés */

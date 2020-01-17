@@ -3,10 +3,54 @@
 namespace controller;
 use model\traducteur;
 use model\offre;
+use model\devis;
 use model\traduction;
 
 
 class Traducteurcontroleur extends \core\Controller\controller {
+
+
+	
+    public function downloadDevis($devis_id){
+		$devis = new devis();
+		$devis_info = $devis->listec(array("id" => $devis_id))[0];
+		$filepath = $devis_info['file_path'];
+        $filename = "Devis_".$devis_id.".pdf";
+        if(file_exists($filepath))
+        {
+            ob_start();
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename='.$filename.''); //Nom du fichier
+            ob_clean();
+            readfile($filepath);
+        }
+        else
+        {
+            $this->render('error');
+        }
+    }
+    public function downloadTraduction($devis_id){
+        $traduction = new traduction();
+        $traductionRow = $traduction->listec(array("devis_id" => $devis_id,"traducteur_id" => $_SESSION['id']));
+        $filepath = $traductionRow[0]['file_path'];
+        $traducteur = new traducteur();
+        $filename = "Traduction_Devis_".$devis_id.".pdf";
+        if(file_exists($filepath))
+        {
+            ob_start();
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename='.$filename.''); //Nom du fichier
+            ob_clean();
+            readfile($filepath);
+        }
+        else
+        {
+            $this->render('error');
+        }
+    }
+    
 
 	public function rendreTraduction()
 	{ 
@@ -36,7 +80,7 @@ class Traducteurcontroleur extends \core\Controller\controller {
 	{
 		/*
             inserer une offre 
-        */
+		*/
 		$offre = new offre();
 		$array['traducteur_id']=$_SESSION['id'];
 		$array['devis_id']=$_POST['devis_id'];

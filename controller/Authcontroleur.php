@@ -32,6 +32,11 @@ class Authcontroleur extends \core\Controller\controller {
 				$_SESSION['lastname'] = $data['lastname'];
 				$_SESSION['email'] = $data['email'];
 				$_SESSION['password'] = $data['password'];
+				$_SESSION['telephone'] = $data['tel'];
+				$_SESSION['fax'] = $data['fax'];
+				$_SESSION['wilaya'] = $data['wilaya'];
+				$_SESSION['commune'] = $data['commune'];
+				$_SESSION['adresse'] = $data['adress'];
 				$_SESSION['type'] = $_POST['type'];
 				$this->home();
 			}

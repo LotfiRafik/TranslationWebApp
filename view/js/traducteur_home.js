@@ -1,29 +1,22 @@
 $(document).ready(function(){
 
   //Function 1
-    $("#retourOffre").click(function(){
+    $(".retourOffre").click(function(){
       $(".infoDevis").hide();
     });
-  
-  
-    //Function 2
-    $("#devisRow").click(function(){
-      var a = $('#devisRowNum').val();
-      $(`#infoDevis${a}`).show();
-    });
 
-    
+    $('#devis_table tr').click( function(){
+      $(`#infoDevis${$(this).index()}`).show();
+      });
+
   //Function 3
-  $("#retourDemande").click(function(){
+  $(".retourDemande").click(function(){
     $(".infoDemande").hide();
   });
 
-
-  //Function 4
-  $("#demandeRow").click(function(){
-    var a = $('#demandeRowNum').val();
-    $(`#infoDemande${a}`).show();
-  });
+  $('#demande_table tr').click( function(){
+    $(`#infoDemande${$(this).index()}`).show();
+    });
 
 
 });
