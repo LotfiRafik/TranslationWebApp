@@ -104,6 +104,11 @@ class Traducteurcontroleur extends \core\Controller\controller {
 		$traducteur = new traducteur();
 		$data = $traducteur->listec($array);
 		$this->render('profiles/traducteur_profile',$data);
-	}
+    }
+    
+    public function signup()
+    {
+        $this->render('traducteur/recrutement');
+    }
 
 }

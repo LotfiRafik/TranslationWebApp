@@ -31,7 +31,7 @@
 				<li><a href="?p=home">Accueil</a></li>
 				<li><a href="#news">News</a></li>
 			   <li><a href="?p=traducteurlist">Traducteurs</a></li>
-			   <li><a href="#news">Recrutement</a></li>
+			   <li><a href="?p=recrutement">Recrutement</a></li>
 			   <li><a href="#news">A propos</a></li>
 		</ul>
 		<div class="diaporama" style="height:30%;width: 100%;text-center:">

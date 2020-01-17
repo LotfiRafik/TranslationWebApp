@@ -46,25 +46,37 @@
 					<span onclick="document.getElementById('signup').style.display='none'" class="sign-close" >&times;</span>
 					<div class="sign-container">
 						<h1>Sign Up</h1>
-						<p>Please fill in this form to create an account.</p>
-						<hr>
-						<label><b>Email</b></label>
-						<input type="text" placeholder="Enter Email" name="email" required>
-						<label><b>Password</b></label>
-						<input type="password" placeholder="Enter Password" name="password" required>
-						<label><b>Repeat Password</b></label>
-						<input type="password" placeholder="Repeat Password" name="rpassword" required>
-						<label ><b>S'inscrire en tant que :</b></label>
-							<input type="radio" checked="checked" name="type" value="client"> Client 
-							<input type="radio" name="type" value="traducteur"> Traducteur 
-						</label>
+						<div class="row">
+							<div class="col-xs-6 col-md-6">
+								<input required type="text" name="lastname" value="" class="form-control input-lg" placeholder="Nom*"  />
+							</div>
+							<div class="col-xs-6 col-md-6">
+								<input required type="text" name="firstname" value="" class="form-control input-lg" placeholder="Prenom*"  />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6 col-md-6">
+								<input type="number" name="tel" value="" class="form-control input-lg" placeholder="Téléphone"  />
+							</div>
+							<div class="col-xs-6 col-md-6">
+								<input type="number" name="fax" value="" class="form-control input-lg" placeholder="Fax"  />
+							</div>
+						</div>
+						<input required type="text" name="email" value="" class="form-control input-lg" placeholder="Votre Email*"  />
+						<input required type="password" name="password" value="" class="form-control input-lg" placeholder="Mot de Passe*"  /><input type="password" name="rpassword" value="" class="form-control input-lg" placeholder="Confirmer Mot de Passe*"  /> 
+						<br/>
 						<?php
 							if(isset($error['signup']))
 							echo '<label><b>Email existe déja ! </b></label>';
 						?>			
-						<p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-						<button type="button" onclick="document.getElementById('signup').style.display='none'" class="sign-cancelbtn">Cancel</button>
-						<button type="submit">Sign Up</button>
+						<div class="row">
+							<div class="col-xs-6 col-md-6">
+							<button type="button" onclick="document.getElementById('signup').style.display='none'" class="sign-cancelbtn">Annuler</button>
+							</div>
+							<div class="col-xs-6 col-md-6">
+							<button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">Créer mon compte</button>  
+							</div>
+						</div>
 					</div>
 				</form>
 			</div>	

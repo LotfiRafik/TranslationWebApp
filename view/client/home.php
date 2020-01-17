@@ -37,7 +37,7 @@
 		</thead>
 		<tbody>
 			<?php
-		if($data != false)
+		if($data['listDevis'] != false)
 		{
 			foreach ($data['listDevis'] as $devis)
 			{?>

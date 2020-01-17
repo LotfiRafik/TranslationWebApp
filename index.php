@@ -8,6 +8,7 @@ use controller\Authcontroleur;
 use controller\Clientcontroleur;
 use controller\Traducteurcontroleur;
 
+
 if(isset($_GET['p']))
   {
     $p  =  $_GET['p'];
@@ -20,6 +21,11 @@ else {
 /*  Fonctionnalités de tout les membres  */
 switch ($p)  
 {
+  case 'recrutement': 
+    $Traducteurcontroleur = new Traducteurcontroleur();     
+    $Traducteurcontroleur->signup();
+    exit(0);
+    break;
   case 'traducteurlist': //Liste des traducteurs
     $Traducteurcontroleur = new Traducteurcontroleur();     
     $Traducteurcontroleur->liste();
@@ -38,6 +44,7 @@ switch ($p)
 }
 
 /*  Fonctionnalités des membres authentifiés */
+
 if(isset($_SESSION['id']))			  
 {
   switch ($_SESSION['type']) {

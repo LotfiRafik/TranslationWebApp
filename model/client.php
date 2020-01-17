@@ -37,10 +37,11 @@ class client extends \core\model\table{
 		return $data;
 	}
 
-	public function ajouter($array=[])		//Ajout d'un new compte 'email password '
+	public function ajouter($array=[])		//Ajout d'un new compte client
 	{
 		$this->insert($array);
-		return $this->db->lastInsertId();
+		$client_id = $this->db->lastInsertId();
+		return ($this->listec(array("id" => $client_id))[0]);
 	}
 
 
