@@ -1,11 +1,11 @@
 .form-style-5{
-	max-width: 500px;
 	margin: 10px auto;
 	padding: 20px;
 	background-color:white;
 	border-radius: 8px;
 	font-family: "Times New Roman";
 	border : 0.5px solid #75da3e;
+	width: 60%;
 
 }
 .form-style-5 label {

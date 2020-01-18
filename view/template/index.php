@@ -7,7 +7,8 @@
 		<link href="view/index.css" rel="stylesheet">	
 		<link href="view/blog/blog.css" rel="stylesheet">	
 		<link href="view/forms/form2.css" rel="stylesheet">
-		<link href="view/css/bootstrap.min.css" rel="stylesheet">
+		<link href="view/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<link href="view/css/font-awesome.min.css" rel="stylesheet">
 
 
 		<script type="text/javascript" src="view/js/jquery-3.3.1.js"></script>

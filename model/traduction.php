@@ -28,11 +28,19 @@ class traduction extends \core\model\table{
     /*
     //Ajout d'une nouvelle traduction
     */
-  public function ajouter($array=[])		
-	{
-        $this->insert($array);
-        return $this->db->lastInsertId();
-  }
+    public function ajouter($array=[])		
+    {
+          $this->insert($array);
+          return $this->db->lastInsertId();
+    }
+
+    //Retourner la moyenne des notes d'un traducteur 
+    public function moyNotes($traducteur_id)
+    {
+      $arguments[0]=$traducteur_id;
+      $statement = 'SELECT avg(note) AS moynote from '.$this->table.' WHERE traducteur_id=?';   
+      return ($this->db->prepare($statement,$arguments)[0]);
+    }
 
 
 }

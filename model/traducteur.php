@@ -56,7 +56,16 @@ class traducteur extends \core\model\table{
 		assermente='.$assermente;
 		$data = $this->db->query($statement);
 		return $data;
+		
 	}
+
+	public function ajouter($array=[])		//Ajout d'un new compte traducteur
+	{
+		$this->insert($array);
+		$traducteur_id = $this->db->lastInsertId();
+		return ($this->listec(array("id" => $traducteur_id))[0]);
+	}
+
 
 	
 

@@ -1,7 +1,7 @@
 <link href="view/css/tableaustyle.css" rel="stylesheet">
 <script type="text/javascript" src="view/js/jquery-3.3.1.js"></script>
 <style>
-	.infoOffre,.infoTraduction,.traducteurs
+	.infoOffre,.infoTraduction,.traducteurs,.infoSignalement
 	{
 		display: none; /* Hidden by default */
 		position: fixed; /* Stay in place */
@@ -151,6 +151,7 @@
 									<th scope="col">Email</th>
 									<th scope="col">Note/5</th>
 									<th scope="col"></th>
+									<th scope="col"></th>
 									</tr>
 								</thead>
 								<tbody id="traduction_table">
@@ -164,19 +165,15 @@
 									
 										?>
 											<tr style="cursor: pointer ; " class="lien" >
-											<th scope="row"><?php echo $traducteur['id'] ?></th>
-											<td><?php echo $traducteur['lastname'] ?></td>
-											<td><?php echo $traducteur['firstname'] ?></td>
-											<td><?php echo $traducteur['email'] ?></td>
-											<td><?php echo $traducteur['traduction']['note'] ?></td>
-											<?php 
-											if($traducteur['offre'])
-											{
-											?>
-											<td><button>Consulter la traduction</button></td>
-											<?php
-											}
-											?>
+												<th scope="row"><?php echo $traducteur['id'] ?></th>
+												<td><?php echo $traducteur['lastname'] ?></td>
+												<td><?php echo $traducteur['firstname'] ?></td>
+												<td><?php echo $traducteur['email'] ?></td>
+												<td><?php echo $traducteur['traduction']['note'] ?></td>
+												<td class="pull-right">
+													<button class="btn btn-success">Consulter la traduction</button>
+													<button class="signaler btn  btn-danger">Signaler</button>
+												</td>
 											</tr>
 										<?php
 											}
@@ -190,11 +187,11 @@
 						$i = 0;
 						if($data['devis']['traducteurs'])
 						{
-						foreach ($data['devis']['traducteurs'] as $traducteur)
-						{
-							if($traducteur['traduction'])
-							{							
-							?>
+							foreach ($data['devis']['traducteurs'] as $traducteur)
+							{
+								if($traducteur['traduction'])
+								{							
+								?>
 									<div class="infoTraduction" id="infoTraduction<?php echo $i?>">
 										<h3>Informations Traduction</h3>
 										<a target="_blank" href="?p=downTrad&tid=<?php echo $traducteur['id']?>&did=<?php echo $data['devis']['id']?>">Document Traduit</a><br>
@@ -205,12 +202,37 @@
 											<input type="submit" value="Noter la traduction"/>	
 										</form>
 										<button class="retourTraduction">Retour</button>
-									</div>		
-							<?php
+									</div>
+									<div class="infoSignalement" id="infoSignalement<?php echo $i?>">		
+									<?php
+									if($traducteur['signalement'])
+									{
+									?>
+										<h3>Informations Signalement</h3>
+										Description:<input type="text" readonly placeholder="<?php echo $traducteur['signalement']['description'] ?>">
+										Date<input type="text" readonly placeholder="<?php echo $traducteur['signalement']['date']?>"><br>
+										<?php
+									}
+									else
+									{
+									?>
+										<form  method="post" action="?p=signaler">
+											<textarea type="text" name="description" placeholder="Explique la raison du signalement ?"></textarea>
+											<input type="hidden" name="devis_id" value=<?php echo $data['devis']['id']?>>
+											<input type="hidden" name="traducteur_id" value=<?php echo $traducteur['id']?>>
+											<input type="submit" value="Signaler ce Traducteur " />	
+										</form>
+									<?php
+									}
+									?>
+									<button class="retourSignalement">Retour</button>
+								</div>
+									<?php
+								}
+								$i++;
 							}
-							$i++;
 						}
-					}
 						?>
+
 							
 <script type="text/javascript" src="view/js/client_devis.js"></script>

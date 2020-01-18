@@ -17,9 +17,10 @@
 </style>
 
 		<div class="col-md-11">
-			<a href="../profiles/client_profile.html"><button class="btn btn-lg btn-info">My Profile</button></a>
-			<a href="?p=deconnexion"><button class="btn btn-lg btn-info">Déconnexion</button></a>
-			
+			<a href="?p=deconnexion"><button class="btn btn-danger pull-right btn-lg">Déconnexion</button></a>
+
+			<a href="?p=traducteurprofile&id=<?php echo $_SESSION['id']?>"><button class="btn btn-lg pull-right btn-success">Mon Profile</button></a>
+			<br>
 			<h3>Liste des demandes de Devis</h6>
 			<div class="ttable">
 			<table class="table">
@@ -34,7 +35,7 @@
 		</thead>
 		<tbody id="devis_table" >
 			<?php
-		if($data != false)
+		if($data['listDevis'])
 		{	
 			foreach ($data['listDevis'] as $devis)
 			{
@@ -69,6 +70,8 @@
 
 		<?php
 			$i = 0;
+			if($data['listDevis'])
+			{
 			foreach ($data['listDevis'] as $devis)
 			{
 			?>
@@ -111,6 +114,7 @@
 			<?php
 			$i++;
 			}
+		}
 			?>
 
 
@@ -167,6 +171,8 @@
 
 		<?php
 			$i = 0;
+			if($data['listDevis'])
+			{
 			foreach ($data['listDevis'] as $devis)
 			{
 				if($devis['demandeTrad'])
@@ -211,6 +217,7 @@
 				}
 				$i++;
 			}
+		}
 			?>
 
 <script type="text/javascript" src="view/js/traducteur_home.js"></script>

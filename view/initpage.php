@@ -1,7 +1,6 @@
-<div class="zone" style="hight:100%;width:100%;">
-		<div class="right_zone">
+
 			<button class="signbtn" onclick="document.getElementById('login').style.display='block'">Login</button>
-			<button class="signbtn" onclick="document.getElementById('signup').style.display='block'">Sign-Up</button>
+			<button class="signbtn" onclick="document.getElementById('signup').style.display='block'">S'incrire</button>
 			<?php
 				if(isset($error['login']))
 				echo '<div id="login" class="sign" style="display:block" >';
@@ -9,8 +8,8 @@
 				echo '<div id="login" class="sign">';
 			?>
 				<form class="sign-content" method="POST" action="?p=connexion">
-					<span onclick="document.getElementById('login').style.display='none'"
-					class="sign-close" >&times;</span>
+				<button class="pull-right btn-danger" type="button" onclick="document.getElementById('login').style.display='none'" >X</button>
+
 					<div class="sign-container">
 						<label for="uname"><b>Email</b></label>
 						<input type="text" placeholder="Entrer votre email" name="email" id="email" required>
@@ -43,10 +42,17 @@
 				echo '<div id="signup" class="sign">';
 			?>
 				<form class="sign-content" method="POST" action="?p=signup">
-					<span onclick="document.getElementById('signup').style.display='none'" class="sign-close" >&times;</span>
+					<button class="pull-right btn-danger" type="button" onclick="document.getElementById('signup').style.display='none'" >X</button>
 					<div class="sign-container">
-						<h1>Sign Up</h1>
-						<div class="row">
+					<div class="row">	
+						<div class="col-xs-6 col-md-6">
+						<h1>Créer un compte client</h1>
+						</div>
+						<div class="col-xs-6 col-md-6">
+						<h3><a href="?p=recrutement" target="_blank" >Cliquer içi pour un compte traducteur</a></h3>
+						</div>
+					</div>
+					<div class="row">
 							<div class="col-xs-6 col-md-6">
 								<input required type="text" name="lastname" value="" class="form-control input-lg" placeholder="Nom*"  />
 							</div>
@@ -81,128 +87,108 @@
 				</form>
 			</div>	
 
-			<div class="form-style-5">
-				<form>
-					<h1>Demande de traduction :</h1>
-					
-					<input type="text" name="langueo" placeholder="Langue d'origine des documents*">
-					<input type="text" name="languec" placeholder="Langue cible*">
-					<label for="job">Type de traduction souhaité:</label>
-					<select id="type_traduction" name="type_traduction">
-					  <option value="generale">Générale</option>
-					  <option value="scientifique">Scientifique</option>
-					  <option value="siteweb">Site web</option>
-					</select>    
-					<textarea name="commentaire" placeholder="Demande spécifique / commentaire ..."></textarea>	
-					<label>Choisir le document a traduire :
-						<input type="file" name="document">
-					</label>
-					<label for="assermente"> Traducteur Assermenté :
-						<input type="checkbox" id="assermente" name="assermente" value="oui">
-					</label></br>
-					<input type="submit" value="Apply" />
-				</form>	
-			</div>
-		</div>
-
-		<div class="left_zone">
-            <div class="blog" style="position: relative;left: 25px;top:76px;">
-			<div class="container">
-					<div class="row">
-						<div class="col-md-4">
-							<div class="row">
-								<div class="col-md-12 post" style="background-color:white;	border-radius: 8px;
-								">
-									<div class="row">
-										<div class="col-md-12">
-											<h4>
-												<strong><a href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html" class="post-title">Titre article 1</a></strong></h4>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12 post-header-line">
-											<span class="glyphicon glyphicon-user"></span>by <a href="#">Lotfi</a> | <span class="glyphicon glyphicon-calendar">
-											</span>Sept 16th, 2012 | <span class="glyphicon glyphicon-comment"></span><a href="#">
-												3 Comments</a> | <i class="icon-share"></i><a href="#">39 Shares</a> | <span class="glyphicon glyphicon-tags">
-												</span>Tags : <a href="#"><span class="label label-info">Snipp</span></a> <a href="#">
-													<span class="label label-info">Bootstrap</span></a> <a href="#"><span class="label label-info">
-														UI</span></a> <a href="#"><span class="label label-info">growth</span></a>
-										</div>
-									</div>
-									<div class="row post-content">
-								
-										<div class="col-md-9">
-											<p>
-												Article 1
-											</p>
-											<p >
-												<a class="btn btn-read-more" href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html">Lire plus</a></p>
-										</div>
-									</div>
-								</div>
-								<!-- Seconde article-->
-								<div class="col-md-12 post"  style="background-color:white;	border-radius: 8px;
-								">
-										<div class="row">
-											<div class="col-md-12">
-												<h4>
-													<strong><a href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html" class="post-title">Cool Share Button Effects Styles</a></strong></h4>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12 post-header-line">
-												<span class="glyphicon glyphicon-user"></span>by <a href="#">Bhaumik</a> | <span class="glyphicon glyphicon-calendar">
-												</span>Sept 16th, 2012 | <span class="glyphicon glyphicon-comment"></span><a href="#">
-													3 Comments</a> | <i class="icon-share"></i><a href="#">39 Shares</a> | <span class="glyphicon glyphicon-tags">
-													</span>Tags : <a href="#"><span class="label label-info">Snipp</span></a> <a href="#">
-														<span class="label label-info">Bootstrap</span></a> <a href="#"><span class="label label-info">
-															UI</span></a> <a href="#"><span class="label label-info">growth</span></a>
-											</div>
-										</div>
-										<div class="row post-content">
-								
-											<div class="col-md-9">
-												<p>
-												Article 2
-												</p>
-												<p>
-													<a class="btn btn-read-more" href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html">Read more</a></p>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-12 post"   style="background-color:white">
-											<div class="row">
-												<div class="col-md-12">
-													<h4>
-														<strong><a href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html" class="post-title">Cool Share Button Effects Styles</a></strong></h4>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-12 post-header-line">
-													<span class="glyphicon glyphicon-user"></span>by <a href="#">Bhaumik</a> | <span class="glyphicon glyphicon-calendar">
-													</span>Sept 16th, 2012 | <span class="glyphicon glyphicon-comment"></span><a href="#">
-														3 Comments</a> | <i class="icon-share"></i><a href="#">39 Shares</a> | <span class="glyphicon glyphicon-tags">
-														</span>Tags : <a href="#"><span class="label label-info">Snipp</span></a> <a href="#">
-															<span class="label label-info">Bootstrap</span></a> <a href="#"><span class="label label-info">
-																UI</span></a> <a href="#"><span class="label label-info">growth</span></a>
-												</div>
-											</div>
-											<div class="row post-content">
 		
-												<div class="col-md-9">
-													<p>
-														Article 3
-													</p>
-													<p>
-														<a class="btn btn-read-more" href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html">Read more</a></p>
-												</div>
-											</div>
-										</div>
+
+			<!-- FORMULAIRE DEMANDE DEVIS -->
+			<div id="ddt-form" class="form-style-5">
+				<form id="devis_form" method="post" action="javascript:void(0)" target="_blank">
+					<h1>Demande de traduction :</h1>
+					<div class="row">
+							<div class="col-xs-6 col-md-6">
+								<label for="job">Nom:</label>
+								<input required type="text" name="nom" >
 							</div>
+							<div class="col-xs-6 col-md-6">
+								<label for="job">Prénom:</label>
+								<input required type="text" name="prenom" >
+							</div>
+					</div>
+					<div class="row">
+							<div class="col-xs-6 col-md-6">
+								<label for="job">Email:</label>
+								<input required type="email" name="email" >
+							</div>
+							<div class="col-xs-6 col-md-6">
+								<label for="job">Téléphone:</label>
+								<input required type="text" name="tel" >
+							</div>
+					</div>
+					<div class="row">
+							<div class="col-xs-12 col-md-12">
+								<label for="job">Adresse:</label>
+								<input required type="text" name="adresse" >
+							</div>
+					</div>
+					<div class="row">
+							<div class="col-xs-6 col-md-6">
+							<label for="job">Langue d'origine des documents*:</label>
+							<select name="langue_s">
+							<option selected="selected" value='Arabe'>Arabe</option>
+							<?php
+								foreach ($data['langues'] as $l) {
+										?>
+										<option value='<?php echo $l['id']; ?>'>
+										<?php echo $l['id']; ?>
+										</option>
+										<?php
+								}
+							?>
+							</select> 
+							</div>
+							<div class="col-xs-6 col-md-6">
+							<label for="job">Langue cible*:</label>
+							<select name="langue_d">
+								<option selected="selected" value='Anglais'>Anglais</option>
+							<?php
+								foreach ($data['langues'] as $l) {
+									?>
+										<option value='<?php echo $l['id']; ?>'>
+										<?php echo $l['id']; ?>
+										</option>
+										<?php
+								}
+							?>
+							</select> 
+							</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6 col-md-6">
+							<label for="job">Type de traduction souhaité:</label>
+								<select name="traduction_type">
+								<?php
+									foreach ($data['traduction_types'] as $type) {
+										?>
+										<option value='<?php echo $type['id']; ?>'>
+										<?php echo $type['description']; ?>
+										</option>
+										<?php
+									}
+								?>
+								</select>    
+								</div>
+								<div class="col-xs-6 col-md-6"></br>
+							<label for="assermente"> Traducteur Assermenté :
+							<input type="checkbox" id="assermente" name="assermente" value="1">
+							</label>
 						</div>
 					</div>
-				</div>
+					<div class="row">
+						<div class="col-xs-6 col-md-6">
+					<textarea name="comment" placeholder="Demande spécifique / commentaire ..."></textarea>	
+								</div>
+					<div class="row">
+						<div class="col-xs-6 col-md-6">
+						<label>Choisir le document a traduire :
+							<input required type="file" name="document">
+						</label>
+								</div>
+					</div>
+							<input type="submit" value="Valider " />
+							</form>	
 			</div>
-		</div>
-		<br style="clear:both;"/>
-    	</div>
+							</div>
+
+			<!-- FORMULAIRE DEMANDE DEVIS -->
+
+
+

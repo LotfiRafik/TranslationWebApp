@@ -10,6 +10,12 @@ $(document).ready(function(){
         $(`#infoOffre${$(this).index()}`).show();
         });
 
+    //Function 
+    $('.signaler').click( function(){
+        console.log($(this).parent().parent().index());
+        $(`#infoSignalement${$(this).parent().parent().index()}`).show();
+        });
+
     //Function 3
     $('#traduction_table tr').click( function(){
         $(`#infoTraduction${$(this).index()}`).show();
@@ -20,7 +26,10 @@ $(document).ready(function(){
     $(".retourTraduction").click(function(){
         $(".infoTraduction").hide();
     });
-
+  //Function 4
+  $(".retourSignalement").click(function(){
+    $(".infoSignalement").hide();
+});
       //Function 5
       $("#getTrad").click(function () {
         $.ajax({

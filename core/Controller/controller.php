@@ -24,6 +24,12 @@ class  Controller {
 
   public function home()
   {
+    $langue = new langue();
+    $type_traduction = new type_traduction();
+    $traduction_types = $type_traduction->getTypeDispo();
+    $langues = $langue->getAll();
+    $data['langues'] = $langues;
+    $data['traduction_types'] = $traduction_types;
    if(isset($_SESSION['type']))
    {
      $devis = new devis();
@@ -33,17 +39,10 @@ class  Controller {
      $devisTraducteur = new devisTraducteur();
      $traducteur = new traducteur();
      $client = new client();
-     $langue = new langue();
-     $type_traduction = new type_traduction();
-
      switch($_SESSION['type'])
      {
        case 'client':
         $i=0; $j=0;
-        $traduction_types = $type_traduction->getTypeDispo();
-        $langues = $langue->getAll();
-        $data['langues'] = $langues;
-        $data['traduction_types'] = $traduction_types;
         $listDevis = $devis->listec(array("client_id" => $_SESSION['id']));
         if($listDevis)
         {
@@ -76,20 +75,24 @@ class  Controller {
        break;
        case 'traducteur':
         $i=0;
+        $listDevis = false;
         $listDevisTrad = $devisTraducteur->listec(array("traducteur_id" => $_SESSION['id']));
-        foreach ($listDevisTrad as $devisTrad)
+        if($listDevisTrad)
         {
-          $devisInfo = $devis->listec(array("id" => $devisTrad['devis_id']));
-          $clientInfo = $client->listec(array("id" => $devisInfo[0]['client_id']));
-          $offreInfo = $offre->listec(array("devis_id" => $devisTrad['devis_id'],"traducteur_id" => $_SESSION['id']));
-          $demandeTradInfo = $demandeTraduction->listec(array("devis_id" => $devisTrad['devis_id'],"traducteur_id" => $_SESSION['id']));
-          $traductionInfo = $traduction->listec(array("devis_id" => $devisTrad['devis_id'],"traducteur_id" => $_SESSION['id']));
-          $listDevis[$i] = $devisInfo[0];
-          $listDevis[$i]['client'] = $clientInfo[0];
-          $listDevis[$i]['offre'] = $offreInfo[0];
-          $listDevis[$i]['demandeTrad'] = $demandeTradInfo[0];
-          $listDevis[$i]['traduction'] = $traductionInfo[0];
-          $i++;
+          foreach ($listDevisTrad as $devisTrad)
+          {
+            $devisInfo = $devis->listec(array("id" => $devisTrad['devis_id']));
+            $clientInfo = $client->listec(array("id" => $devisInfo[0]['client_id']));
+            $offreInfo = $offre->listec(array("devis_id" => $devisTrad['devis_id'],"traducteur_id" => $_SESSION['id']));
+            $demandeTradInfo = $demandeTraduction->listec(array("devis_id" => $devisTrad['devis_id'],"traducteur_id" => $_SESSION['id']));
+            $traductionInfo = $traduction->listec(array("devis_id" => $devisTrad['devis_id'],"traducteur_id" => $_SESSION['id']));
+            $listDevis[$i] = $devisInfo[0];
+            $listDevis[$i]['client'] = $clientInfo[0];
+            $listDevis[$i]['offre'] = $offreInfo[0];
+            $listDevis[$i]['demandeTrad'] = $demandeTradInfo[0];
+            $listDevis[$i]['traduction'] = $traductionInfo[0];
+            $i++;
+          }
         }
         $data['listDevis'] = $listDevis;
         $this->render('traducteur/home',$data);	//page d'acceuil des traducteurs
@@ -98,7 +101,7 @@ class  Controller {
    }
    else
    {
-      $this->render('initpage');		//page d'acceuil des membres non authentifiés
+      $this->render('initpage',$data);		//page d'acceuil des membres non authentifiés
    }
   }
   

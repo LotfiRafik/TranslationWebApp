@@ -20,6 +20,12 @@ class type_traduction extends \core\model\table{
 		return $data;
     }
 
+    public function listec($array=[])
+    {
+        $data = $this->select($array);
+        return $data;
+  }
+
 
 }
     

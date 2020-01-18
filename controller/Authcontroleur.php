@@ -45,7 +45,11 @@ class Authcontroleur extends \core\Controller\controller {
 				$error['login'] = true;
 			}
 		}
-		$this->render('initpage',null,$error);
+		$traduction_types = $type_traduction->getTypeDispo();
+        $langues = $langue->getAll();
+        $data['langues'] = $langues;
+        $data['traduction_types'] = $traduction_types;
+		$this->render('initpage',$data,$error);
 	}
 
 
@@ -63,7 +67,11 @@ class Authcontroleur extends \core\Controller\controller {
 		    if($data)
 		    {
 				$error['signup'] = true;
-				$this->render('initpage',null,$error);;
+				$traduction_types = $type_traduction->getTypeDispo();
+				$langues = $langue->getAll();
+				$data['langues'] = $langues;
+				$data['traduction_types'] = $traduction_types;
+				$this->render('initpage',$data,$error);;
 		    }
 			else 					//Sinon on ajoute le compte dans la table client
 			{
@@ -84,14 +92,22 @@ class Authcontroleur extends \core\Controller\controller {
 	    }
 	    else
 	    {
-			$this->render('initpage');;
+			$traduction_types = $type_traduction->getTypeDispo();
+			$langues = $langue->getAll();
+			$data['langues'] = $langues;
+			$data['traduction_types'] = $traduction_types;
+			$this->render('initpage',$data);;
 	    }
 	}
 
 	 public function deconnexion()
 	 {	
 		 session_destroy();
-		 $this->render('initpage');
+		 $traduction_types = $type_traduction->getTypeDispo();
+			$langues = $langue->getAll();
+			$data['langues'] = $langues;
+			$data['traduction_types'] = $traduction_types;
+		 $this->render('initpage',$data);
 	 }
 
 

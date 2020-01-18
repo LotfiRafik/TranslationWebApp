@@ -1,8 +1,9 @@
-<link href="../css/recrutement.css" rel="stylesheet">
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
+<link href="view/css/recrutement.css" rel="stylesheet">
 
 
+<?php
+    var_dump($data['error']);
+?>
 <div class="container register">
                 <div class="row">
                 <div class="col-md-3 register-left">
@@ -14,55 +15,58 @@
                                 <h3 class="register-heading">Créér un compte Traducteur</h3>
                                 <div class="row register-form">
                                     <div class="col-md-6">
-                                        <form id="signup-form" method="POST" action="?p=rec" >
+                                        <form id="signup-form" method="POST" action="?p=recrutement" enctype='multipart/form-data' >
                                         <div class="form-group">
-                                            <input type="text" class="form-control input-lg" placeholder="First Name *" value="" />
+                                            <input type="text" class="form-control input-lg" name="firstname" placeholder="Prénom *" required/>
+                                        </div> 
+                                        <div class="form-group">
+                                            <input type="text" class="form-control input-lg"  name="lastname"  placeholder="Nom *" required/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control input-lg" placeholder="Last Name *" value="" />
+                                            <input type="password" class="form-control input-lg" name="password"  placeholder="Password *" required />
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control input-lg" placeholder="Password *" value="" />
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control input-lg"  placeholder="Confirm Password *" value="" />
+                                            <input type="password" class="form-control input-lg" name="rpassword"  placeholder="Confirm Password *" required />
                                         </div>                 
                                         <div class="form-check">
                                             <label for="assermente"> Vous étes un traducteur assermenté :</label>
-                                            <input class="form-check-input" type="checkbox" value="" id="assermente">
+                                            <input class="form-check-input" type="checkbox" name="assermente"  value="" id="assermente">
                                         </div>                
                                         <div class="form-group">
-                                            <label for="ref_files">Upload up to 3 references files</label>
-                                            <input type="file" class="form-control input-lg-file" id="ref_files" multiple>
+                                            <label for="ref_files">Charger jusqu’à 3 fichiers de ces références:</label>
+                                            <input type="file" class="form-control input-lg-file" name="referenceFiles" id="ref_files" multiple>
                                         </div>
                                         <div class="form-group">
                                             <ol id="list_langue"></ol>
                                             <select id="lang_select">
                                                 <?php
-                                                   /* foreach ($data['langues'] as $l) {
+                                                   foreach ($data['langues'] as $l) {
                                                             ?>
                                                             <option value='<?php echo $l['id']; ?>'>
                                                             <?php echo $l['id']; ?>
                                                             </option>
                                                             <?php
-                                                    }*/
+                                                    }
                                                 ?>
                                             </select>
-                                            <button id="addlang">Add language</button>
                                         </div>
+                                        <button type="button" class="btn" id="addlang">Ajouter une langue</button>
+
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" class="form-control input-lg" placeholder="Your Email *" value="" />
+                                            <input type="email" class="form-control input-lg" name="email"  placeholder="Votre Email *" required />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control input-lg" placeholder="Your Phone *" value="" />
+                                            <input type="text" minlength="10" maxlength="10" name="tel" class="form-control input-lg" required placeholder="Your Phone *" value="" />
                                         </div>
                                         <div class="form-group">
                                             <label for="cv">Upload CV</label>
-                                            <input type="file" class="form-control input-lg-file" id="cv">
+                                            <input type="file" name="cv" class="form-control input-lg-file" required id="cv">
                                         </div><br>
-                                        <div id="asserment_file" class="form-group" >
+                                        <div  class="form-group" >
+                                        <label for="assermente">Upload proove assermente</label>
+                                        <input id="asserment_file" type="file" class="form-control input-lg-file"name="assermenteFile" >
                                         </div>
                                     </div>
                                 </div>     
@@ -75,9 +79,12 @@
 <script>
 $(document).ready(function(){
 
+    var max_lang = 5;
+    var nb_lang = 0;
+
     $("form").submit(function(e){
         var $fileUpload = $("#ref_files");
-        if (parseInt($fileUpload.get(0).files.length)>2){
+        if (parseInt($fileUpload.get(0).files.length)>3){
          alert("You can only upload a maximum of 3 files");
          e.preventDefault();
         }
@@ -92,12 +99,27 @@ $(document).ready(function(){
         }
     });
 
-
     $("#assermente").click(function(){
         var n = $("input:checked").length;
-        if(n>0) $("#asserment_file").html('<label for="assermente">Upload proove assermente</label><input type="file" class="form-control input-lg-file" id="asserfile" required>');
-        else $("#asserment_file").html("");
-    }); 
+        if(n>0) $("#asserment_file").prop('required',true);
+        else $("#asserment_file").prop('required',false);
+    });
+
+    $("#addlang").click(function(){
+        console.log($('#list_langue li').length + 1);
+        if($('#list_langue li').length + 1 < 6)
+        {
+            var langue = $('#lang_select :selected').val();
+            $('#list_langue').append('<li><input name="langues[]" placeholder="'+ langue +'" value="'+ langue +'"><button  type="button"  class="glyphicon glyphicon-remove"  style="color:red"></button></li>');
+        }
+        else{
+            alert("Vous ne pouvez plus ajouter une langue ! ");
+        }
+
+    });
+    $('#list_langue').on('click', '.glyphicon-remove', function() { 
+            $(this).parent().remove();
+       });
     
 })
 </script>

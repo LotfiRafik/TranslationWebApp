@@ -1,16 +1,15 @@
 .right_zone
 {
-	border-radius: 8px;
 	position: relative;
-	width: 50%;
+	width: 65%;
 	height: 100%;
 	float: right;
+	padding-right: 20px;
 }
 .left_zone
 {
-	border-radius: 8px;
 	position: relative;
-	width: 50%;
+	width: 35%;
 	height: 100%;
 	float: left;
 }
