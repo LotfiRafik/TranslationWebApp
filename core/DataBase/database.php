@@ -11,7 +11,7 @@ class dataBase{
     private $db_pass;
     private $pdo;
 
-    public function __construct($db_name="web_project_2cs",$db_host='localhost',$db_user='root',$db_pass='')
+    public function __construct($db_name="TDW",$db_host='localhost',$db_user='root',$db_pass='')
     {
     	$this->db_name=$db_name;
     	$this->db_host=$db_host;

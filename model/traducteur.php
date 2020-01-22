@@ -56,7 +56,28 @@ class traducteur extends \core\model\table{
 		assermente='.$assermente;
 		$data = $this->db->query($statement);
 		return $data;
-		
+	}
+
+	public function getTraducteurDispo($langue_s,$langue_d,$assermente,$devis_id)
+	{
+		$statement = 'SELECT * from '.$this->table.' WHERE 
+		(langue1="'.$langue_s.'" OR 
+		langue2="'.$langue_s.'" OR
+		langue3="'.$langue_s.'" OR
+		langue4="'.$langue_s.'" OR
+		langue5="'.$langue_s.'") 
+		AND
+		(langue1="'.$langue_d.'" OR
+		langue2="'.$langue_d.'" OR
+		langue3="'.$langue_d.'" OR
+		langue4="'.$langue_d.'" OR
+		langue5="'.$langue_d.'")
+		AND
+		assermente='.$assermente.'
+		AND 
+		id NOT IN (SELECT traducteur_id from devis_traducteur WHERE devis_id='.$devis_id.')';
+		$data = $this->db->query($statement);
+		return $data;
 	}
 
 	public function ajouter($array=[])		//Ajout d'un new compte traducteur

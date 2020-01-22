@@ -1,6 +1,8 @@
 
-			<button class="signbtn" onclick="document.getElementById('login').style.display='block'">Login</button>
-			<button class="signbtn" onclick="document.getElementById('signup').style.display='block'">S'incrire</button>
+			<div class="row pull-right col-xs-6 col-md-6">
+				<button class="signbtn" onclick="document.getElementById('login').style.display='block'">Login</button>
+				<button class="signbtn" onclick="document.getElementById('signup').style.display='block'">S'incrire</button>
+			</div>
 			<?php
 				if(isset($error['login']))
 				echo '<div id="login" class="sign" style="display:block" >';
@@ -25,13 +27,10 @@
 							echo '<label><b>Email et/ou Mot de passe incorrect :</b></label>';
 						?>
 						<button type="submit">Login</button>
-						<label>
-							<input type="checkbox" checked="checked" name="remember"> Remember me
-						</label>
+		
 					</div>
 					<div class="sign-container" style="background-color:#f1f1f1">
 						<button type="button" onclick="document.getElementById('login').style.display='none'" 	class="sign-cancelbtn">Annuler</button>
-						<span class="sign-psw">Oublié <a href="#">Mot de passe?</a></span>
 					</div>
 				</form>
 			</div>
@@ -90,33 +89,34 @@
 		
 
 			<!-- FORMULAIRE DEMANDE DEVIS -->
-			<div id="ddt-form" class="form-style-5">
+			<div class="col-xs-12 col-md-12">
+			<div id="ddt-form" class="form-style-5 pull-right">
 				<form id="devis_form" method="post" action="javascript:void(0)" target="_blank">
 					<h1>Demande de traduction :</h1>
 					<div class="row">
 							<div class="col-xs-6 col-md-6">
 								<label for="job">Nom:</label>
-								<input required type="text" name="nom" >
+								<input readonly type="text" name="nom" >
 							</div>
 							<div class="col-xs-6 col-md-6">
 								<label for="job">Prénom:</label>
-								<input required type="text" name="prenom" >
+								<input readonly type="text" name="prenom" >
 							</div>
 					</div>
 					<div class="row">
 							<div class="col-xs-6 col-md-6">
 								<label for="job">Email:</label>
-								<input required type="email" name="email" >
+								<input readonly type="email" name="email" >
 							</div>
 							<div class="col-xs-6 col-md-6">
 								<label for="job">Téléphone:</label>
-								<input required type="text" name="tel" >
+								<input readonly type="text" name="tel" >
 							</div>
 					</div>
 					<div class="row">
 							<div class="col-xs-12 col-md-12">
 								<label for="job">Adresse:</label>
-								<input required type="text" name="adresse" >
+								<input readonly type="text" name="adresse" >
 							</div>
 					</div>
 					<div class="row">
@@ -174,21 +174,22 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
-					<textarea name="comment" placeholder="Demande spécifique / commentaire ..."></textarea>	
+					<textarea  readonly name="comment" placeholder="Demande spécifique / commentaire ..."></textarea>	
 								</div>
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
 						<label>Choisir le document a traduire :
-							<input required type="file" name="document">
+							<input readonly type="file" name="document">
 						</label>
 								</div>
 					</div>
-							<input type="submit" value="Valider " />
+							<input readonly type="button" value="Valider " />
 							</form>	
 			</div>
 							</div>
-
+							</div>
 			<!-- FORMULAIRE DEMANDE DEVIS -->
+
 
 
 

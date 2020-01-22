@@ -8,6 +8,7 @@ use model\traduction;
 use model\devisTraducteur;
 use model\demandeTraduction;
 use model\signalementClient;
+use model\type_traduction;
 
 
 
@@ -101,12 +102,10 @@ class Clientcontroleur extends \core\Controller\controller {
 
     public function demanderDevis()
     {
-        if(isset($_SESSION['id']))
-        {
             if(isset($_POST) && !empty($_POST))
             {
                 //Insertion du devis dans la base de donnée
-            /*  $devis = new devis();
+                $devis = new devis();
                 $_POST['client_id'] = $_SESSION['id'];
                 $devis_id = $devis->ajouter($_POST);
                 //uploader le fichier du devis
@@ -119,18 +118,14 @@ class Clientcontroleur extends \core\Controller\controller {
                 }
                 //Inserer le chemin du fichier dans la table devis
                 $devis->update(array('file_path' => $dest),array('id' => $devis_id));    
-            }*/
-            //retourner les traducteurs qui correspond aux critéres
+                //retourner les traducteurs qui correspond aux critéres
+                $traducteur = new traducteur();
+                if(!isset($_POST['assermente'])) $_POST['assermente'] = 0;
+                $list_traducteur = $traducteur->filterTraducteur($_POST['langue_s'],$_POST['langue_d'],$_POST['assermente']);
+                $devisArray['devis_id'] = $devis_id;
+                $list['traducteurs'] = $list_traducteur;
+                echo json_encode(array_merge($devisArray,$list));
             }
-            $traducteur = new traducteur();
-            if(!isset($_POST['assermente'])) $_POST['assermente'] = 0;
-            $list_traducteur = $traducteur->filterTraducteur($_POST['langue_s'],$_POST['langue_d'],$_POST['assermente']);
-            $devisArray['devis_id'] = 5;
-            $list['traducteurs'] = $list_traducteur;
-            echo json_encode(array_merge($devisArray,$list));
-        }
-
-      
     }
 
     public function getTraducteurDispo()
@@ -138,7 +133,7 @@ class Clientcontroleur extends \core\Controller\controller {
         $devis = new devis();
         $devisInfo = $devis->listec(array("id" => $_POST['devis_id']))[0];
         $traducteur = new traducteur();
-        $list_traducteur_dispo = $traducteur->filterTraducteur($devisInfo['langue_s'],$devisInfo['langue_d'],$devisInfo['assermente']);
+        $list_traducteur_dispo = $traducteur->getTraducteurDispo($devisInfo['langue_s'],$devisInfo['langue_d'],$devisInfo['assermente'],$devisInfo['id']);
         echo json_encode($list_traducteur_dispo);
     }
 
@@ -147,6 +142,7 @@ class Clientcontroleur extends \core\Controller\controller {
         //Recuperer les infos du devis,traducteurs,offres
         $i=0;
         $devis = new devis();
+		$type_traduction = new type_traduction();
         $devisTraducteur = new devisTraducteur();
         $demandeTraduction = new demandeTraduction();
         $signalement = new signalementClient();
@@ -154,6 +150,8 @@ class Clientcontroleur extends \core\Controller\controller {
         $offre = new offre();
         $traduction = new traduction();
         $devis = $devis->listec(array("id" => $devis_id))[0];
+        $traduction_types = $type_traduction->listec(array("id" => $devis['traduction_type']))[0];
+        $devis['traduction_type'] = $traduction_types['description'];
         $listTraducteurId = $devisTraducteur->getAll($devis_id);
         $devis['traducteurs'] = false;
         if($listTraducteurId)

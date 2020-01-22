@@ -5,13 +5,15 @@
 	.infoDevis,.infoDemande
 	{
 		display: none; /* Hidden by default */
+		padding : 10px;
 		position: fixed; /* Stay in place */
-		background-color:beige;
+		background-color:white;
 		z-index: 1; /* Sit on top */
-		top: 10%;
+		top: 8%;
 		left : 15%;
-		height: 50%; /* Full height */
-		overflow: auto; /* Enable scroll if needed */
+		height: 70%; /* Full height */
+		width:60%;
+		overflow-y: auto; /* Enable scroll if needed */overflow-x:hidden;
 		border : 1px black solid;
 	}
 </style>
@@ -76,40 +78,80 @@
 			{
 			?>
 			<div class="infoDevis" id="infoDevis<?php echo $i?>">
-					<h3>Informations Devis</h3>
-					Nom:<input type="text" readonly placeholder="<?php echo $devis['nom'] ?>">
-					Prenom:<input type="text" readonly placeholder="<?php echo $devis['prenom'] ?>">
-					Email:<input type="text" readonly placeholder="<?php echo $devis['email'] ?>"><br>
-					Téléphone:<input type="text" readonly placeholder="<?php echo $devis['tel'] ?>">
-					Adresse:<input type="text" readonly placeholder="<?php echo $devis ['adresse'] ?>">
-					Langue Source:<input type="text" readonly placeholder="<?php echo $devis ['langue_s'] ?>"><br>
-					Langue Cible:<input type="text" readonly placeholder="<?php echo $devis ['langue_d'] ?>">
-					Type Traduction:<input type="text" readonly placeholder="<?php echo $devis ['traduction_type'] ?>">
-					Assermente:<input type="text" readonly placeholder="<?php echo $devis ['assermente'] ?>"><br>
-					Commentaire:<input type="text" readonly placeholder="<?php echo $devis ['comment'] ?>">
-					Date:<input type="text" readonly placeholder="<?php echo $devis ['date'] ?>">
-					<a target="_blank" href="?p=downDevis&did=<?php echo $devis['id']?>">Document A Traduire</a>
-					<br><br><br>
+				<button class="retourOffre pull-right btn-danger" type="button">x</button>	
+				<h3>Informations Devis</h3>
+				<div class="row">
+					<div class="col-xs-3 col-md-3">
+					Nom:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['nom'] ?>">						
+					</div>
+					<div class="col-xs-3 col-md-3">
+					Prenom:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['prenom'] ?>">
+					</div>
+					<div class="col-xs-3 col-md-3">
+					Email:<input type="text"  class="form-control input"  readonly placeholder="<?php echo $devis['email'] ?>">
+					</div>
+					<div class="col-xs-3 col-md-3">
+					Téléphone:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['tel'] ?>">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-3 col-md-3">
+					Adresse:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['adresse'] ?>">
+					</div>
+					<div class="col-xs-3 col-md-3">
+						Langue Source:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['langue_s'] ?>"></div>
+					<div class="col-xs-3 col-md-3">
+						Langue Cible:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['langue_d'] ?>"></div>
+					<div class="col-xs-3 col-md-3">
+						Type Traduction:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['traduction_type'] ?>">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-3 col-md-3">
+						Traducteur Assermente:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['assermente'] ?>">
+					</div>
+					<div class="col-xs-3 col-md-3">
+						Commentaire:<textarea type="text"  class="form-control input" readonly placeholder="<?php echo $devis['comment'] ?>"></textarea>
+					</div>
+					<div class="col-xs-3 col-md-3">
+						Date :<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['date'] ?>">
+					</div>
+					<div class="col-xs-3 col-md-3">
+						<br><i class="glyphicon glyphicon-file" style="color:red;"></i><a target="_blank" href="?p=downDevis&did=<?php echo $devis['id']?>">Document_A_Traduire</a>
+					</div>
+				</div>
+					<br>
 					<?php
 						if($devis['offre'])
 						{?>
 							<h3>L'offre soumit a cet devis:</h3>
-							Prix en dinar algérien:<input type="number" readonly placeholder="<?php echo $devis['offre']['prix'] ?>">
-							Date:<input type="text" readonly placeholder="<?php echo $devis['offre']['date'] ?>"><br>
+							<div class="row">
+								<div class="col-xs-6 col-md-6">
+								<label>Prix en dinar algérien:</label><input type="number"  class="form-control input"  readonly placeholder="<?php echo $devis['offre']['prix'] ?>">
+								</div>
+								<div class="col-xs-6 col-md-6">
+								<label>Date:</label><input type="text" readonly  class="form-control input"  placeholder="<?php echo $devis['offre']['date'] ?>">
+								</div>
+							</div>
 						<?php
 						}
 						else{
 						?>
 							<form  id="sendOffre" method="post" action="?p=addOffreDevis">
-								Prix en dinar algérien:<input type="number" name="prix" min="50" required> 
-								(L'offre minimal est a 50 DZD)
-								<input type="hidden" name="devis_id" value=<?php echo $devis['id']?>>
-								<input type="submit" value="Envoyer l'offre " />				
+							<div class="row">
+								<div class="col-xs-6 col-md-6">
+									<label>Prix en dinar algérien:</label><input  class="form-control input"  type="number" name="prix" min="50" required> 
+									(L'offre minimal est a 50 DZD)
+								</div>
+								<div class="col-xs-6 col-md-6">
+									<br><input type="submit" class="btn btn-primary" value="Envoyer l'offre " />
+								</div>
+							</div>				
+							<input type="hidden" name="devis_id" value=<?php echo $devis['id']?>>
 							</form>
 						<?php
 						}
 						?>
-					<button class="retourOffre">Retour</button>
 			</div>
 			<?php
 			$i++;
@@ -179,39 +221,77 @@
 				{
 			?>
 			<div class="infoDemande" id="infoDemande<?php echo $i?>">
-					<h3>Informations sur la demande de traduction</h3>
-					Nom:<input type="text" readonly placeholder="<?php echo $devis['nom'] ?>">
-					Prenom:<input type="text" readonly placeholder="<?php echo $devis['prenom'] ?>">
-					Email:<input type="text" readonly placeholder="<?php echo $devis['email'] ?>"><br>
-					Téléphone:<input type="text" readonly placeholder="<?php echo $devis['tel'] ?>">
-					Adresse:<input type="text" readonly placeholder="<?php echo $devis ['adresse'] ?>">
-					Langue Source:<input type="text" readonly placeholder="<?php echo $devis ['langue_s'] ?>"><br>
-					Langue Cible:<input type="text" readonly placeholder="<?php echo $devis ['langue_d'] ?>">
-					Type Traduction:<input type="text" readonly placeholder="<?php echo $devis ['traduction_type'] ?>">
-					Assermente:<input type="text" readonly placeholder="<?php echo $devis ['assermente'] ?>"><br>
-					Commentaire:<input type="text" readonly placeholder="<?php echo $devis ['comment'] ?>">
-					Date:<input type="text" readonly placeholder="<?php echo $devis ['date'] ?>">
-					<a target="_blank" href="?p=downTrad&did=<?php echo $devis['id']?>">Document Traduit</a>
-					<br><br><br>
+				<button class="retourDemande pull-right btn-danger" type="button">x</button>	
+				<h3>Informations sur la demande de traduction :</h3>
+					<div class="row">
+						<div class="col-xs-3 col-md-3">
+						Nom:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['nom'] ?>">						
+						</div>
+						<div class="col-xs-3 col-md-3">
+						Prenom:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['prenom'] ?>">
+						</div>
+						<div class="col-xs-3 col-md-3">
+						Email:<input type="text"  class="form-control input"  readonly placeholder="<?php echo $devis['email'] ?>">
+						</div>
+						<div class="col-xs-3 col-md-3">
+						Téléphone:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['tel'] ?>">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-md-3">
+						Adresse:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['adresse'] ?>">
+						</div>
+						<div class="col-xs-3 col-md-3">
+							Langue Source:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['langue_s'] ?>"></div>
+						<div class="col-xs-3 col-md-3">
+							Langue Cible:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['langue_d'] ?>"></div>
+						<div class="col-xs-3 col-md-3">
+							Type Traduction:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['traduction_type'] ?>">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-md-3">
+							Traducteur Assermente:<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['assermente'] ?>">
+						</div>
+						<div class="col-xs-3 col-md-3">
+							Commentaire:<textarea type="text"  class="form-control input" readonly placeholder="<?php echo $devis['comment'] ?>"></textarea>
+						</div>
+						<div class="col-xs-3 col-md-3">
+							Date :<input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['date'] ?>">
+						</div>
+						<div class="col-xs-3 col-md-3">
+							<br><i class="glyphicon glyphicon-file" style="color:red;"></i><a target="_blank" href="?p=downDevis&did=<?php echo $devis['id']?>">Document_A_Traduire</a>
+						</div>
+					</div>
+					<br>
 					<?php
 						if($devis['traduction'])
 						{
 					?>
-						Feedback du client :<br>
-						Note / 5:<input type="text" readonly placeholder="<?php echo $devis['traduction']['note'] ?>"><br>
+						<h3>Feedback du client :</h3>
+						<div class="row">
+							<div class="col-xs-6 col-md-6">
+								<label>Note / 5:</label><input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['traduction']['note'] ?>">
+							</div>
+						</div>
 					<?php
 						}
 						else {
 							?>
 							<form  id="sendTraduction" method="post" action="?p=sendTraduction" enctype='multipart/form-data'>
-							Document :<input type="file" name="document" required>
 							<input type="hidden" name="devis_id" value=<?php echo $devis['id']?>>
-							<input type="submit" value="Rendre la traduction" />				
+							<div class="row">
+								<div class="col-xs-6 col-md-6">
+									<label>Document traduit :</label><input type="file"  class="form-control input" name="document" required>
+								</div>
+								<div class="col-xs-6 col-md-6">
+									<br><input type="submit"  class="btn btn-primary" value="Rendre la traduction" />
+								</div>
+							</div>
 							</form>	
 						<?php					
 						}
 					?>
-					<button class="retourDemande">Retour</button>
 			</div>
 			<?php
 				}

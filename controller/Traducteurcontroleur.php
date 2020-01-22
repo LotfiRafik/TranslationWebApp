@@ -113,7 +113,7 @@ class Traducteurcontroleur extends \core\Controller\controller {
 		$traducteur = new traducteur();
 		$liste = $traducteur->liste();
 		//$liste : tableau d'objets  $liste = $data ;
-		$this->render('profiles/profiles',$liste);
+		$this->render('traducteur/profiles',$liste);
 	}
 
 	public function profile($id)
@@ -253,9 +253,12 @@ class Traducteurcontroleur extends \core\Controller\controller {
                 $dest = 'Traducteurs/'.$_SESSION['id'].'/assermente.'.$extension ;
                 move_uploaded_file($_FILES['assermenteFile']['tmp_name'],$dest);
             }
-            for( $i=1 ; $i < $total ; $i++ ){
-                $dest = 'Traducteurs/'.$_SESSION['id'].'/reference'.$i.'.'.$extension ;
-                move_uploaded_file($_FILES['referenceFiles']['tmp_name'][$i],$dest);
+            if(isset($total))
+            {
+                for( $i=1 ; $i < $total ; $i++ ){
+                    $dest = 'Traducteurs/'.$_SESSION['id'].'/reference'.$i.'.'.$extension ;
+                    move_uploaded_file($_FILES['referenceFiles']['tmp_name'][$i],$dest);
+                }
             }
 			$this->home();
 	    }

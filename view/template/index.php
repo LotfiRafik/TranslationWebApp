@@ -3,10 +3,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<link href="view/template/template.css" rel="stylesheet">		
-		<link href="view/login/sign.css" rel="stylesheet">		
+		<link href="view/css/sign.css" rel="stylesheet">		
 		<link href="view/index.css" rel="stylesheet">	
-		<link href="view/blog/blog.css" rel="stylesheet">	
-		<link href="view/forms/form2.css" rel="stylesheet">
+		<link href="view/css/form2.css" rel="stylesheet">
 		<link href="view/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<link href="view/css/font-awesome.min.css" rel="stylesheet">
 
@@ -47,18 +46,9 @@
 		<?php
         echo $content;
 		?>
-		
-
-
-		<br>	
-		<br>	
-		<br>	
-		<br>	
-		<br>	
-		<br>	
-		<br>	
-	
-		<ul class="main-menu">
+			
+		 <br><br><br>
+		<ul class="main-menu pull-left">
 				<li><a href="?p=home">Accueil</a></li>
 				<li><a href="#news">News</a></li>
 			   <li><a href="?p=traducteurlist">Traducteurs</a></li>

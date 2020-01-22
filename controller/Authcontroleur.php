@@ -3,6 +3,8 @@
 namespace controller;
 use model\client;
 use model\traducteur;
+use model\type_traduction;
+use model\langue;
 
 
 class Authcontroleur extends \core\Controller\controller {
@@ -45,10 +47,8 @@ class Authcontroleur extends \core\Controller\controller {
 				$error['login'] = true;
 			}
 		}
-		$traduction_types = $type_traduction->getTypeDispo();
-        $langues = $langue->getAll();
-        $data['langues'] = $langues;
-        $data['traduction_types'] = $traduction_types;
+		$langue = new langue();
+		+
 		$this->render('initpage',$data,$error);
 	}
 
@@ -91,7 +91,8 @@ class Authcontroleur extends \core\Controller\controller {
 			}
 	    }
 	    else
-	    {
+	    {$langue = new langue();
+			$type_traduction = new type_traduction();
 			$traduction_types = $type_traduction->getTypeDispo();
 			$langues = $langue->getAll();
 			$data['langues'] = $langues;
@@ -102,12 +103,14 @@ class Authcontroleur extends \core\Controller\controller {
 
 	 public function deconnexion()
 	 {	
-		 session_destroy();
-		 $traduction_types = $type_traduction->getTypeDispo();
-			$langues = $langue->getAll();
-			$data['langues'] = $langues;
-			$data['traduction_types'] = $traduction_types;
-		 $this->render('initpage',$data);
+		session_destroy();
+		$langue = new langue();
+		$type_traduction = new type_traduction();
+		$traduction_types = $type_traduction->getTypeDispo();
+		$langues = $langue->getAll();
+		$data['langues'] = $langues;
+		$data['traduction_types'] = $traduction_types;
+		$this->render('initpage',$data);
 	 }
 
 

@@ -20,6 +20,7 @@ $(document).ready(function(){
                 <td> ${obj['lastname']} </td>
                 <td> ${obj['firstname']} </td>
                 <td> ${obj['email']} </td>
+                <td><a target="_blank" href="?p=traducteurprofile&id=${obj['id']}">Profile</a></td>
                 <td><input type="checkbox" name="traducteursId[]" value="${obj['id']}"></td>
               </tr>
             `);
