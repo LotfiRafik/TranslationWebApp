@@ -2,7 +2,7 @@
 <link href="view/css/profiles.css" rel="stylesheet">
 
 			<?php 
-			if($_SESSION['id'] === $data['infos']['id'])  
+			if(isset($_SESSION['id']) AND ($_SESSION['id'] === $data['infos']['id']))  
 			{
 			?>
 			<button class="btn"  style="float:right;background-color:#1abc9c" onclick="document.getElementById('editProfile').style.display='block'">Modifier Mes Informations Personnelles</button>
@@ -141,16 +141,10 @@
 						 <div class="well profile">
 							<div class="col-sm-12">
 								<div class="col-xs-12 col-sm-8">
-									<p><strong>Cv: </strong>
-									<?php echo $data['infos']['email']?>
-									</p>
-									</p>
-									<p><strong>Documents references : </strong>
-									<?php echo $data['infos']['adress'];?>									</p>
-									</p>
-									<p><strong>Document assermentation : </strong>
-									<?php echo $data['infos']['adress'];?>									</p>
-									</p>
+									<a target="_blank" href="Traducteurs/<?php echo $data['infos']['id'];?>/CV.pdf">CV</a>
+								</div>             
+								<div class="col-xs-12 col-sm-8">
+									<a  target="_blank" href="Traducteurs/<?php echo $data['infos']['id'];?>/assermente.pdf">Document assermentation</a>
 								</div>             
 							</div>            
 						 </div>               

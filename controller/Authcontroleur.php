@@ -48,7 +48,7 @@ class Authcontroleur extends \core\Controller\controller {
 			}
 		}
 		$langue = new langue();
-		+
+	
 		$this->render('initpage',$data,$error);
 	}
 
@@ -58,6 +58,8 @@ class Authcontroleur extends \core\Controller\controller {
 	public function signup()
 	{
 		$error = null;
+		$langue = new langue();
+		$type_traduction = new type_traduction();
 		if(isset($_POST) && !empty($_POST))
 		{
 			$user = new client();
@@ -91,7 +93,8 @@ class Authcontroleur extends \core\Controller\controller {
 			}
 	    }
 	    else
-	    {$langue = new langue();
+	    {	
+			$langue = new langue();
 			$type_traduction = new type_traduction();
 			$traduction_types = $type_traduction->getTypeDispo();
 			$langues = $langue->getAll();

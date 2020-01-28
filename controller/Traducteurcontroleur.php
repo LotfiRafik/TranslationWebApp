@@ -8,9 +8,7 @@ use model\langue;
 use model\traduction;
 use model\type_traduction;
 use model\demandeTraduction;
-
-
-
+use model\signalementTraducteur;
 
 
 class Traducteurcontroleur extends \core\Controller\controller {
@@ -114,7 +112,17 @@ class Traducteurcontroleur extends \core\Controller\controller {
 		$liste = $traducteur->liste();
 		//$liste : tableau d'objets  $liste = $data ;
 		$this->render('traducteur/profiles',$liste);
-	}
+    }
+    
+    
+    public function signaler()
+    {
+        $signalement = new signalementTraducteur();
+        $_POST['traducteur_id'] = $_SESSION['id'];
+        $signalement->ajouter($_POST);        
+        $this->home('traducteur/home');
+    }
+
 
 	public function profile($id)
 	{

@@ -9,6 +9,8 @@ use model\traduction;
 use model\devisTraducteur;
 use model\demandeTraduction;
 use model\langue;
+use model\signalementTraducteur;
+
 
 
 class  Controller {
@@ -74,6 +76,7 @@ class  Controller {
         $this->render('client/home',$data);		//page d'acceuil des clients
        break;
        case 'traducteur':
+        $signalement = new signalementTraducteur();
         $i=0;
         $listDevis = false;
         $listDevisTrad = $devisTraducteur->listec(array("traducteur_id" => $_SESSION['id']));
@@ -86,17 +89,18 @@ class  Controller {
             $offreInfo = $offre->listec(array("devis_id" => $devisTrad['devis_id'],"traducteur_id" => $_SESSION['id']));
             $demandeTradInfo = $demandeTraduction->listec(array("devis_id" => $devisTrad['devis_id'],"traducteur_id" => $_SESSION['id']));
             $traductionInfo = $traduction->listec(array("devis_id" => $devisTrad['devis_id'],"traducteur_id" => $_SESSION['id']));
+            $signalementInfo = $signalement->listec(array("devis_id" => $devisTrad['devis_id'],"traducteur_id" => $_SESSION['id']));
             $listDevis[$i] = $devisInfo[0];
             $listDevis[$i]['client'] = $clientInfo[0];
             $listDevis[$i]['offre'] = $offreInfo[0];
             $listDevis[$i]['demandeTrad'] = $demandeTradInfo[0];
             $listDevis[$i]['traduction'] = $traductionInfo[0];
+            $listDevis[$i]['signalement'] = $signalementInfo[0];
             $i++;
           }
         }
         $data['listDevis'] = $listDevis;
         $this->render('traducteur/home',$data);	//page d'acceuil des traducteurs
-       break;	         
      }
    }
    else

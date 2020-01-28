@@ -265,18 +265,59 @@
 					</div>
 					<br>
 					<?php
-						if($devis['traduction'])
-						{
-					?>
-						<h3>Feedback du client :</h3>
+					if($devis['traduction'])
+					{	
+						?>
 						<div class="row">
-							<div class="col-xs-6 col-md-6">
-								<label>Note / 5:</label><input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['traduction']['note'] ?>">
+							<div class="col-xs-8 col-md-8">
+								<h3>Feedback du client :</h3>
+								<label>Note:</label><input type="text"  class="form-control input" readonly placeholder="<?php echo $devis['traduction']['note'] ?>">
 							</div>
 						</div>
-					<?php
+						<?php 
+						if($devis['signalement'])
+						{
+						?>
+						<div class="row">
+							<div class="col-xs-12 col-md-12">
+								<h3>Informations Signalement :</h3>
+								<div class="row">
+									<div class="col-md-6">
+										<label>Description</label>:<textarea class="form-control input" type="text" readonly placeholder="<?php echo $devis['signalement']['description'] ?>"></textarea>
+									</div>
+									<div class="col-md-6">
+										<label>Date</label><input class="form-control input" type="text" readonly placeholder="<?php echo $devis['signalement']['date']?>">
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php
 						}
-						else {
+						else
+						{
+						?>		
+						<div class="row">			
+							<div class="col-xs-4 col-md-4 ">
+								<h3>Signaler ce client :</h3>
+								<form  method="post" action="?p=signaler">
+									<input type="hidden" name="devis_id" value=<?php echo $devis['id']?>>
+									<div class="row">
+										<div class="col-xs-12 col-md-12">
+											<textarea required type="text" name="description" placeholder="Explique la raison du signalement ?"></textarea>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12 col-md-12">
+											<input type="submit"  class="btn btn-danger"  value="Signaler" />
+										</div>
+									</div>	
+								</form>
+							</div>
+						</div>
+					<?php	
+						}
+					}
+					else {
 							?>
 							<form  id="sendTraduction" method="post" action="?p=sendTraduction" enctype='multipart/form-data'>
 							<input type="hidden" name="devis_id" value=<?php echo $devis['id']?>>

@@ -29,7 +29,7 @@
 
 <script type="text/javascript" src="view/js/jquery-3.3.1.js"></script>
 
-		<div class="col-md-11">
+		<div class="col-md-12">
 		<a class="pull-right" href="?p=deconnexion"><button class="btn btn-lg btn-danger">Déconnexion</button></a>
 			<a class="pull-right" href="../profiles/client_profile.html"><button class="btn btn-lg btn-info">Mon Profile</button></a>
 			<button  id="addv" class="btn btn-lg btn-info push-left">Nouveau Devis</button>

@@ -17,7 +17,9 @@
 	}
 </style>
 
-		<div class="col-md-11">
+		<div class="col-md-12">
+		<a class="pull-right" href="?p=deconnexion"><button class="btn btn-lg btn-danger">Déconnexion</button></a>
+			<a class="pull-right" href="../profiles/client_profile.html"><button class="btn btn-lg btn-info">Mon Profile</button></a><br>
 			<div  style="background-color:white;">
 			<h3>Informations Devis</h3>
 				<div class="row">
@@ -199,7 +201,7 @@
 									<th scope="col">Nom</th>
 									<th scope="col">Prenom</th>
 									<th scope="col">Email</th>
-									<th scope="col">Note/5</th>
+									<th scope="col">Note</th>
 									<th scope="col"></th>
 									<th scope="col"></th>
 									</tr>
@@ -264,7 +266,7 @@
 										</form>
 									</div>
 									<div class="infoSignalement" id="infoSignalement<?php echo $i?>">	
-									<button class="retourSignalement pull-right btn-danger" type="button">x</button>	
+									<button class="retourSignalement retourTraduction pull-right btn-danger" type="button">x</button>	
 									<?php
 									if($traducteur['signalement'])
 									{

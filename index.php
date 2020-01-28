@@ -111,6 +111,9 @@ if(isset($_SESSION['id']))
         case 'addOffreDevis':
             $Traducteurcontroleur->ajouterOffre();
           break;
+        case 'signaler':
+            $Traducteurcontroleur->signaler();
+          break; 
         case 'deconnexion':
             $Authcontroleur = new Authcontroleur();
             $Authcontroleur->deconnexion();

@@ -1,5 +1,15 @@
 <link href="view/css/recrutement.css" rel="stylesheet">
 
+
+<div>
+<?php
+if(isset($data['error']))
+{
+    ?><script>alert("<?php echo $data['error']?>")</script><?php
+}
+?>
+</div>
+
 <div class="container register">
                 <div class="row">
                 <div class="col-md-3 register-left">
@@ -38,7 +48,7 @@
                                                 <?php
                                                    foreach ($data['langues'] as $l) {
                                                             ?>
-                                                            <option value='<?php echo $l['id']; ?>'>
+                                                            <option value="<?php echo $l['id']; ?>">
                                                             <?php echo $l['id']; ?>
                                                             </option>
                                                             <?php
@@ -66,7 +76,7 @@
                                         </div>
                                     </div>
                                 </div>     
-                                <input type="submit" class="btnRegister"  value="Register"/>
+                                <input type="submit" class="btnRegister"  value="Valider"/>
 
                                     </form>                    
                              </div>
@@ -81,15 +91,21 @@ $(document).ready(function(){
     $("form").submit(function(e){
         var $fileUpload = $("#ref_files");
         if (parseInt($fileUpload.get(0).files.length)>3){
-         alert("You can only upload a maximum of 3 files");
+         alert("Vous pouvez uploader au maximum 3 fichiers références !");
          e.preventDefault();
+        }
+        console.log($('#list_langue li').length);
+        if($('#list_langue li').length < 2)
+        {
+            alert("Veuillez selectionner au moin 2 langues !");
+            e.preventDefault();
         }
         var n = $("input:checked").length;
         if(n>0){
             var $fileUpload = $("#asserfile");
             if (parseInt($fileUpload.get(0).files.length)<=0)
             {
-                 alert("preuve assermente");
+                 alert("preuve assermente !");
                  e.preventDefault();
             }
         }
@@ -102,7 +118,6 @@ $(document).ready(function(){
     });
 
     $("#addlang").click(function(){
-        console.log($('#list_langue li').length + 1);
         if($('#list_langue li').length + 1 < 6)
         {
             var langue = $('#lang_select :selected').val();

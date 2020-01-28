@@ -32,7 +32,8 @@ class client extends \core\model\table{
 
 	public function liste()				//Return tt les comptes
 	{
-		$data = App::getDb()->query('SELECT * FROM users');
+		$data = $this->db->query('SELECT * FROM '.$this->table);
+
 		//DATA TABLEAU D'OBJETS
 		return $data;
 	}

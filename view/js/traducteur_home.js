@@ -15,6 +15,7 @@ $(document).ready(function(){
   });
 
   $('#demande_table tr').click( function(){
+    console.log($(this).index());
     $(`#infoDemande${$(this).index()}`).show();
     });
 
