@@ -33,7 +33,7 @@ div.top-template  ul.link-menu
 	top : 0;
 	right: 150px;
 	margin: 0px;
-	height: 100%;
+	height: 50%;
 }
 div.top-template  .link-menu li
 {
@@ -50,7 +50,6 @@ div.top-template  .link-menu li a {
 	text-align: center;
 	text-decoration: none;
 	margin-top: 50%;
-	margin-bottom: 50%;
   }
 
 ul.main-menu {

@@ -36,6 +36,10 @@ if(isset($_SESSION['id']))
         case 'debloquerTraducteur':
             $Admincontroleur->debloquerTraducteur();
           break; 
+          case 'traducteurProfile':
+            $Admincontroleur->traducteurProfile($_GET['id']);
+          break; 
+        //Gestion Client
           case 'gestionClient':
             $Admincontroleur->gestionClient();
           break; 
@@ -48,6 +52,23 @@ if(isset($_SESSION['id']))
         case 'debloquerClient':
             $Admincontroleur->debloquerClient();
           break;
+          case 'clientProfile':
+            $Admincontroleur->clientProfile($_GET['id']);
+          break; 
+          case 'clientDevis':
+            $Admincontroleur->echoDevis($_GET['id']);
+          break; 
+
+        //Gestion Document
+        case 'gestionDocument':
+          $Admincontroleur->gestionDocument();
+        break; 
+
+        case 'supDocument':
+          $Admincontroleur->deleteDocument($_GET['did']);
+        break; 
+
+
         case 'deconnexion':
           $Authcontroleur = new Authcontroleur();
            $Authcontroleur->deconnexion();

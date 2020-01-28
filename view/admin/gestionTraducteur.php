@@ -24,7 +24,8 @@
             <i  onclick="sortTable(3)" class="fa fa-sort-alpha-down"> </i>
             </th>
             <th scope="col"></th>
-			<th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -40,7 +41,8 @@
 				<td><?php echo $traducteur['lastname'] ?></td>
 				<td><?php echo $traducteur['firstname'] ?></td>
 				<td><?php echo $traducteur['email'] ?></td>
-				<td><?php echo $traducteur['wilaya'] ?></td>
+                <td><?php echo $traducteur['wilaya'] ?></td>
+                <td><a  href="?p=traducteurProfile&id=<? echo $traducteur['id'] ?>" ><button class="btn btn-info">Profile</button></a></td>
                 <td><button class="btn-editTraducteur btn btn-primary">Modifier</button></td>
                 <?php if($traducteur['idbloquer']) {?>
                     <td><a  href="?p=debloquerTraducteur&id=<? echo $traducteur['id'] ?>" ><button class="btn btn-success">Debloquer</button></a></td>

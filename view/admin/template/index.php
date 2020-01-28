@@ -17,11 +17,13 @@
 		<div class="top-template"> 
 			<img src="view/template/logo.jpg"  alt="logo"  class="logo">
 			<ul class="link-menu">
-				<li><a href="www.facebook.com" target="_self"> Facebook </a></li>
-				<li><a href="www.instagram.com" target="_self"> Instagram </a></li>
-				<li><a href="www.twitter.com" target="_self"> Twitter </a></li>	
+				<li><a href="www.facebook.com" > Facebook </a></li>
+				<li><a href="www.instagram.com" > Instagram </a></li>
+				<li><a href="www.twitter.com" > Twitter </a></li>	
+				<li><a href="?p=deconnexion">Déconnexion</a><li>
 			</ul>		
 		</div>
+
 
 
 		<?php
