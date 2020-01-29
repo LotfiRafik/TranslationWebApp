@@ -26,10 +26,7 @@ class Admincontroleur extends controller {
     {
         $traduction = new traduction();
         $data = false;
-        if(isset($_POST) AND !empty($_POST))
-        {
-            $data = $traduction->stats($_POST['date1'],$_POST['date2']);
-        }
+        $data = $traduction->stats($_POST['date1'],$_POST['date2']);
         echo json_encode($data);
     }
 
