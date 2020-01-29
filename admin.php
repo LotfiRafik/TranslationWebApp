@@ -68,7 +68,16 @@ if(isset($_SESSION['id']))
           $Admincontroleur->deleteDocument($_GET['did']);
         break; 
 
+        //Statistiques
+        case 'stats':
+          $Admincontroleur->statistique();
+         break; 
+         case 'nbTraduction':
+          $Admincontroleur->nbTraduction();
+         break; 
+         
 
+         //---------------------------------
         case 'deconnexion':
           $Authcontroleur = new Authcontroleur();
            $Authcontroleur->deconnexion();

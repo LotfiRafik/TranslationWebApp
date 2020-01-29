@@ -41,6 +41,11 @@ class traduction extends \core\model\table{
       $statement = 'SELECT avg(note) AS moynote from '.$this->table.' WHERE traducteur_id=?';   
       return ($this->db->prepare($statement,$arguments)[0]);
     }
-
+    public function stats($date1,$date2)
+    {
+    // nb traduction entre 2 dates
+      $data = $this->db->query('select date,count(*) AS nb from '.$this->table.' where date between '.$date1.' AND '.$date2.' GROUP BY date');
+      return $data;
+     }
 
 }

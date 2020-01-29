@@ -17,6 +17,28 @@ class Admincontroleur extends controller {
 
 
 
+    public function statistique()
+    {
+        $this->render('statistiques');
+    }
+    
+    public function nbTraduction()
+    {
+        $traduction = new traduction();
+        $data = false;
+        if(isset($_POST) AND !empty($_POST))
+        {
+            $data = $traduction->stats($_POST['date1'],$_POST['date2']);
+        }
+        echo json_encode($data);
+    }
+
+
+
+
+
+
+
     public function gestionTraducteur()
     {
         //recuperer liste des traducteurs
