@@ -241,7 +241,7 @@ class Admincontroleur extends controller {
     }
 
     
-  public function clientProfile()
+  public function clientProfile($id)
   {
 
      $devis = new devis();
@@ -252,7 +252,8 @@ class Admincontroleur extends controller {
      $traducteur = new traducteur();
      $client = new client();
         $i=0; $j=0;
-        $listDevis = $devis->listec(array("client_id" => $_SESSION['id']));
+        $data['clientInfo'] = $client->listec(array("id" => $id))[0];
+        $listDevis = $devis->listec(array("client_id" => $id));
         if($listDevis)
         {
           foreach ($listDevis as $devis)
@@ -324,6 +325,47 @@ class Admincontroleur extends controller {
         $data['devis'] = $devis;
         $this->render('clientDevis',$data);		//page devis 
 
+    }
+
+
+    public function downloadDevis($devis_id){
+        $devis = new devis();
+        $filepath = $devis->listec(array("id" => $devis_id))[0]['file_path'];
+        $filename = "Devis_".$devis_id.".pdf";
+        if(file_exists($filepath))
+        {
+            ob_start();
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename='.$filename.''); //Nom du fichier
+            ob_clean();
+            readfile($filepath);
+        }
+        else
+        {
+            $this->render('error');
+        }
+    }
+    public function downloadTraduction($devis_id,$traducteur_id){
+        $traduction = new traduction();
+        $traductionRow = $traduction->listec(array("devis_id" => $devis_id,"traducteur_id" => $traducteur_id));
+        $filepath = $traductionRow[0]['file_path'];
+        $traducteur = new traducteur();
+        $traducteur_info = $traducteur->listec(array("id" => $traducteur_id))[0];
+        $filename = "Traduction".$traducteur_info['lastname']."-".$traducteur_info['firstname'].".pdf";
+        if(file_exists($filepath))
+        {
+            ob_start();
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename='.$filename.''); //Nom du fichier
+            ob_clean();
+            readfile($filepath);
+        }
+        else
+        {
+            $this->render('error');
+        }
     }
 
 

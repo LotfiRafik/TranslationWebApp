@@ -1,6 +1,5 @@
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
-    
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <a href="javascript:history.back()"><i class="glyphicon glyphicon-arrow-left"></i>Retour</a><br>
       <input type="date" id="date1"  />
       <input type="date" id="date2" />
       <button  id="submit" >Voir Statistiques</button> <br>
@@ -8,11 +7,7 @@
     <div id="line_chart" style="width: 900px; height: 500px">
     </div><br>
     <div id="histo_chart" style="width: 900px; height: 500px">
-    </div>
-
- 
-    
-    
+    </div>    
     
     <script>
         $(document).ready(function(){
@@ -35,6 +30,7 @@
             },
             success: function (res) {
               var ajaxData = JSON.parse(res);
+              console.log(ajaxData);
               var i=0;var nbtotal = 0;
               for(i=0;i<ajaxData.length;i++)
               {
@@ -44,7 +40,7 @@
                 chartData.addRow([date,nbTraduction]);
               }
               var options = {
-                title: 'Nombre de traductions',
+                title: 'Nombre de traductions entre ' + $('#date1').val() + ' et ' + $('#date2').val() ,
                 legend: { position: 'bottom' }
               };
               var line_chart = new google.visualization.LineChart(document.getElementById('line_chart'));

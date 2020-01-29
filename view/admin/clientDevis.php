@@ -15,6 +15,7 @@
 		border : 1px black solid;
 	}
 </style>
+ <a href="javascript:history.back()"><i class="glyphicon glyphicon-arrow-left"></i>Retour</a>
 
 		<div class="col-md-12">
 			<div  style="background-color:white;">

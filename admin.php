@@ -67,6 +67,12 @@ if(isset($_SESSION['id']))
         case 'supDocument':
           $Admincontroleur->deleteDocument($_GET['did']);
         break; 
+        case 'downDevis':
+          $Admincontroleur->downloadDevis($_GET['did']);
+        break;
+      case 'downTrad':
+          $Admincontroleur->downloadTraduction($_GET['did'],$_GET['tid']);
+        break;
 
         //Statistiques
         case 'stats':

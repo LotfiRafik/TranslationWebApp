@@ -1,5 +1,34 @@
 
 		<div class="col-md-12">
+		<a href="javascript:history.back()"><i class="glyphicon glyphicon-arrow-left"></i>Retour</a>
+
+<div class="container">
+        <div class="row">
+             <div class="well profile">
+                <div class="col-sm-12">
+                    <div class="col-xs-12 col-sm-8">
+                        <h2 style="margin-bottom: 0;" >
+                            <?php echo $data['clientInfo']['lastname']." ".$data['clientInfo']['firstname']; ?>
+                        </h2>
+                        <p><strong>
+                            <?php echo $data['clientInfo']['wilaya']." ".$data['clientInfo']['commune'];?>
+                            </strong></p>
+                        <p><strong>Email: </strong>
+                        <?php echo $data['clientInfo']['email']?>
+                        </p>
+                        </p>
+                        <p><strong>Adresse: </strong>
+                        <?php echo $data['clientInfo']['adress'];?>									</p>
+                        </p>
+						<p><strong>Téléphone: </strong>
+                        <?php echo $data['clientInfo']['tel'];?>									</p>
+                        </p><p><strong>Fax: </strong>
+                        <?php echo $data['clientInfo']['fax'];?>									</p>
+                    </div>           
+                </div>            
+             </div>               
+        </div>
+    </div>
 
 			<h3> Historique des Devis</h6>
 			<div class="ttable">
