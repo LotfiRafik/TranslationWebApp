@@ -34,10 +34,10 @@
 		{
 			foreach ($data['devis'] as $devis)
 			{
-        if($devis['traducteursId'])
+        if($devis['traducteursInfo'])
         {
           $j = 0;
-          foreach ($devis['traducteursId'] as $traducteurId)
+          foreach ($devis['traducteursInfo'] as $traducteurId)
           {?>
             <tr  style="cursor: pointer ; " class="lien" >
               <th scope="row"><?php echo $devis['id'] ?></th>
@@ -45,7 +45,7 @@
 </a></td>
               <td>pdf</td>
               <td><?php echo $devis['date'] ?></td>
-              <td><a target="_blank" href="?p=clientProfile&id=<? echo $devis['client_id'] ?>" ><button class="btn btn-info">Profile</button></a></td>
+              <td><a target="_blank" href="?p=clientProfile&id=<? echo $devis['client_id'] ?>" ><button class="btn btn-info"><?php echo $devis['clientInfo'][0]['lastname'].'<br>'.$devis['clientInfo'][0]['firstname'] ?></button></a></td>
               <?php if($devis['demandeTraduction'][$j])
               {
                 ?>								<td><i class="glyphicon glyphicon-ok" style="color:green"></i></td>
@@ -58,11 +58,11 @@
 
              <?}
               ?>
-              <td><a target="_blank" href="?p=traducteurProfile&id=<? echo $traducteurId ?>" ><button class="btn btn-info">Profile</button></a></td>
+              <td><a target="_blank" href="?p=traducteurProfile&id=<? echo $traducteurId[0]['id'] ?>" ><button class="btn btn-info"><?php echo $traducteurId[0]['lastname'].'<br>'.$traducteurId[0]['firstname'] ?></button></a></td>
               <?php if($devis['traduction'][$j]) 
               {
                 ?>                   
-               <td><i class="glyphicon glyphicon-file" style="color:red;"></i><a target="_blank" href="?p=downTrad&did=<?php echo $devis['id']?>&tid=<? echo $traducteurId ?>"><?php echo $devis['traduction'][$j]['file_path'] ?></td>
+               <td><i class="glyphicon glyphicon-file" style="color:red;"></i><a target="_blank" href="?p=downTrad&did=<?php echo $devis['id']?>&tid=<? echo $traducteurId['id'] ?>"><?php echo $devis['traduction'][$j]['file_path'] ?></td>
 
               <?php
               }
@@ -73,7 +73,7 @@
               <?php
               }
               ?>
-              <td><a href="?p=supDocument&did=<?php echo $devis['id']?>"><button class="btn-editdevis btn btn-danger">Supprimer</button></a></td>
+              <td><a href="?p=supDocument&did=<?php echo $devis['id']?>&tid=<?php  echo $traducteurId['id'] ?>"><button class="btn-editdevis btn btn-danger">Supprimer</button></a></td>
           </tr>
       <?php
               $j++;

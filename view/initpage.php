@@ -1,8 +1,14 @@
-
-			<div class="row pull-right col-xs-6 col-md-6">
+<link href="view/css/blog.css" rel="stylesheet">		
+<style>
+	.form-style-5
+	{
+		width: 100% !important;
+	}
+</style>
+			<div class="row pull-right  col-md-8"  >
 				<button class="signbtn" onclick="document.getElementById('login').style.display='block'">Login</button>
 				<button class="signbtn" onclick="document.getElementById('signup').style.display='block'">S'incrire</button>
-			</div>
+
 			<?php
 				if(isset($error['login']))
 				echo '<div id="login" class="sign" style="display:block" >';
@@ -191,5 +197,48 @@
 			<!-- FORMULAIRE DEMANDE DEVIS -->
 
 
+							</div>
 
+<div class="container" style="height:100%;">
+<div id="blog" class="pull-left  row  col-md-4" > 
+	<br><br><br>
+	<h3>Articles récents</h3>
+  <div  class="row"> 
+		   <div class="col-md-10 blogShort">
+			   <h4>Interpréter les défis de l’industrie des hydrocarbures</h4>
+			   <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/guinnes-150x150.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+			   			   <article><p>
+				   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+				   ever since the 1500s, when 
+				   </p></article>
+			   <a class="btn btn-blog pull-right marginBottom10" href="http://bootsnipp.com/user/snippets/2RoQ">READ MORE</a> 
+		   </div>
+</div>
+		   <div  class="row"> 
+			<div class="col-md-10 blogShort">
+			   <h4>À Paris, des intervenants pour la protection de l’eau</h4>
+			   <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/DSC_4073-150x150.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+			   <article><p>
+				   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+				   ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only 
+				
+				   </p></article>
+			   <a class="btn btn-blog pull-right marginBottom10" href="http://bootsnipp.com/user/snippets/2RoQ">READ MORE</a> 
+		   </div>
+</div>
+<div  class="row"> 
+			<div class="col-md-10 blogShort">
+			   <h4>Interprétation commerciale haute définition</h4>
+			   <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/DSC_4073-150x150.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+			   <article><p>
+				   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+				   ever since 
+				   </p></article>
+			   <a class="btn btn-blog pull-right marginBottom10" href="http://bootsnipp.com/user/snippets/2RoQ">READ MORE</a> 
+		   </div>
+</div>
+		   
+	   </div>
+							</div>
 
+				

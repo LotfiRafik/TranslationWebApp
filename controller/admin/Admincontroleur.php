@@ -62,13 +62,15 @@ class Admincontroleur extends controller {
         $devisTraducteur = new devisTraducteur();
         $demandeTraduction = new demandeTraduction();
         $traduction = new traduction();
+        $client = new client();
 
         $data['devis'] = $devis->getAll();
         $j = 0;
         foreach ($data['devis'] as $devis) 
         {
             $listTraducteurId = $devisTraducteur->getAll($devis['id']);
-            $data['devis'][$j]['traducteursId'] = false;
+            $data['devis'][$j]['clientInfo'] = $client->listec(array("id" => $devis['client_id']));
+            $data['devis'][$j]['traducteursInfo'] = false;
             if($listTraducteurId)
             {
                 $i = 0;
@@ -76,7 +78,7 @@ class Admincontroleur extends controller {
                 {
                     $data['devis'][$j]['demandeTraduction'][$i] = $demandeTraduction->listec(array("devis_id" => $devis['id'],"traducteur_id" => $traducteurId['traducteur_id']))[0];
                     $data['devis'][$j]['traduction'][$i] = $traduction->listec(array("devis_id" => $devis['id'],"traducteur_id" => $traducteurId['traducteur_id']))[0];
-                    $data['devis'][$j]['traducteursId'][$i] = $traducteurId['traducteur_id'];
+                    $data['devis'][$j]['traducteursInfo'][$i] = $traducteur->listec(array("id" => $traducteurId['traducteur_id']));
                     $i++;
                 }
             }
@@ -87,19 +89,22 @@ class Admincontroleur extends controller {
     }
 
 
-    public function deleteDocument($devis_id)
+    public function deleteTransaction($devis_id,$traducteur_id)
     {
-
         $devis = new devis();        
-        $devisInfo = $devis->listec(array("id" => $devis_id))[0];
-        //update database;
-        $devis->update(array("file_path" => null),array("id" => $devis_id));
-        //delete file
-        if(file_exists($devisInfo['file_path']))
-		{
-
-		    unlink($devisInfo['file_path']);
-        }
+        $offre = new offre();
+        $traduction = new traduction();
+        $demandeTraduction = new demandeTraduction();
+        $devisTraducteur = new devisTraducteur();
+        //traduction
+        $traduction->delete(array("devis_id" => $devis_id,"traducteur_id" => $traducteur_id));
+        //demande_trad
+        $demandeTraduction->delete(array("devis_id" => $devis_id,"traducteur_id" => $traducteur_id));
+        //offre
+        $offre->delete(array("devis_id" => $devis_id,"traducteur_id" => $traducteur_id));
+        //devis_trad
+        $devisTraducteur->delete(array("devis_id" => $devis_id,"traducteur_id" => $traducteur_id));
+        
         $this->gestionDocument();
     }
         

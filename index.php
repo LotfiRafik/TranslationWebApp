@@ -40,6 +40,10 @@ switch ($p)
     $Traducteurcontroleur = new Traducteurcontroleur();
     $Traducteurcontroleur->profile($_GET['id']);
     exit(0);
+  case 'clientprofile':      //Profile client
+    $Clientcontroleur = new Clientcontroleur();
+    $Clientcontroleur->profile($_GET['id']);
+    exit(0);
   break;
 }
 
@@ -56,6 +60,9 @@ if(isset($_SESSION['id']))
       {
         case 'addTradDevis':
             $Clientcontroleur->ajouterTraducteurDevis();
+          break; 
+          case 'addTradDevis2':
+            $Clientcontroleur->ajouterTraducteurDevis2();
           break; 
         case 'signaler':
             $Clientcontroleur->signaler();
@@ -78,8 +85,14 @@ if(isset($_SESSION['id']))
         case 'reqdevis':
            $Clientcontroleur->demanderDevis();
           break; 
+        case 'reqTraduction':
+          $Clientcontroleur->demanderDevis();
+          break;
         case 'addDemandeTrad':
             $Clientcontroleur->ajouterDemandeTrad();
+          break;
+          case 'editProfile':
+            $Clientcontroleur->editProfile();
           break;
         case 'deconnexion':
           $Authcontroleur = new Authcontroleur();

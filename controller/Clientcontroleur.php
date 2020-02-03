@@ -65,6 +65,18 @@ class Clientcontroleur extends \core\Controller\controller {
         $this->echoDevis($array2['devis_id']);
     }
 
+    public function editProfile()
+    {
+        if(isset($_POST) and !empty($_POST))
+        {
+            $client = new client();
+            unset($_POST['rpassword']);
+            if(empty($_POST['password']))    unset($_POST['password']);
+            $client->update($_POST,array("id" => $_SESSION['id']));
+        }
+        $this->profile($_SESSION['id']);
+    }
+
 
     public function ajouterDemandeTrad()
     {
@@ -80,7 +92,7 @@ class Clientcontroleur extends \core\Controller\controller {
     {
         $signalement = new signalementClient();
         $signalement->ajouter($_POST);        
-        $this->echoDevis($_POST['devis_id']);
+        header('Location:?p=devis&id='.$_POST['devis_id']);
     }
 
 
@@ -96,8 +108,67 @@ class Clientcontroleur extends \core\Controller\controller {
             $array['traducteur_id'] = $id;
             $devisTraducteur->ajouter($array);
         }
-        $this->echoDevis($array['devis_id']);
+        header('Location:?p=devis&id='.$array['devis_id']);
+
     }
+    
+    public function ajouterTraducteurDevis2()
+    {
+        /*
+            devis_id et les id des traducteurs selectionnés par le client 
+            et les inserer dans la table devis_traducteur
+        */
+        $devisTraducteur = new devisTraducteur();
+        $demandeTraduction = new demandeTraduction();
+        $offre = new offre();
+        $array['devis_id']=$_POST['devis_id'];
+        $array['prix']=$_POST['prix'];
+        //devis_traducteur
+        foreach ($_POST['traducteursId'] as $tradId => $id) {
+            $array['traducteur_id'] = $id;
+            $devisTraducteur->ajouter(array("devis_id" => $_POST['devis_id'],"traducteur_id" => $id));
+            $offre->ajouter($array);
+            $demandeTraduction->ajouter(array("devis_id" => $_POST['devis_id'],"traducteur_id" => $id));
+        }
+        header('Location:?p=devis&id='.$array['devis_id']);
+    }
+
+
+
+
+    
+	public function profile($id)
+	{
+        $i = 0;
+        $client = new client();
+        $traductionModel = new traduction();
+        $demandeTraduction = new demandeTraduction();
+        $type_traduction = new type_traduction();
+        $devis = new devis();
+        $offre = new offre();
+        $data['devis'] = $devis->listec(array("client_id" => $id));
+        $data['infos'] = $client->listec(array("id" => $id))[0];
+        if($data['devis'])
+        {
+            foreach ($data['devis'] as $devisInfo) {
+ 
+                $data['traductions'] = $traductionModel->listec(array("devis_id" => $devisInfo['id']));
+
+                if($data['traductions'])
+                {
+                    foreach ($data['traductions'] as $traduction) {
+                        $data['traductions'][$i]['devis'] = $devisInfo;
+                        $data['traductions'][$i]['prix'] = $offre->listec(array("devis_id" => $traduction['devis_id'],"traducteur_id" => $id))[0]['prix'];
+                        $typeId = $data['traductions'][$i]['devis']['traduction_type'];
+                        $data['traductions'][$i]['type'] = $type_traduction->listec(array("id" => $typeId))[0]['description'];
+                        $i++;
+                    }
+                }
+            }
+        }
+        $this->render('client/profile',$data);
+    }
+
 
 
     public function demanderDevis()
@@ -120,10 +191,24 @@ class Clientcontroleur extends \core\Controller\controller {
                 $devis->update(array('file_path' => $dest),array('id' => $devis_id));    
                 //retourner les traducteurs qui correspond aux critéres
                 $traducteur = new traducteur();
+                $demandeTraduction = new demandeTraduction();
+                $traduction = new traduction();
                 if(!isset($_POST['assermente'])) $_POST['assermente'] = 0;
                 $list_traducteur = $traducteur->filterTraducteur($_POST['langue_s'],$_POST['langue_d'],$_POST['assermente']);
                 $devisArray['devis_id'] = $devis_id;
                 $list['traducteurs'] = $list_traducteur;
+                $i = 0;
+                foreach ($list_traducteur as $traducteurInfo) {
+                    $list['traducteurs'][$i]['nbdemande'] = $demandeTraduction->listec(array("traducteur_id" => $traducteurInfo['id']));
+                    if(!$list['traducteurs'][$i]['nbdemande']) $list['traducteurs'][$i]['nbdemande'] = 0;
+                    else $list['traducteurs'][$i]['nbdemande'] = count($list['traducteurs'][$i]['nbdemande']);
+                    $list['traducteurs'][$i]['moynote'] = intval($traduction->moyNotes($traducteurInfo['id'])['moynote']);
+                    $nbTraductions = $traduction->listec(array("traducteur_id" => $traducteurInfo['id']));
+                    if(!$nbTraductions) $list['traducteurs'][$i]['nb_traduction'] = 0;
+                    else $list['traducteurs'][$i]['nb_traduction'] = count($nbTraductions);
+                    $i++;
+                }
+
                 echo json_encode(array_merge($devisArray,$list));
             }
     }

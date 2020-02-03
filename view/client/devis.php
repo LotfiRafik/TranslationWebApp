@@ -151,6 +151,9 @@
 									<form  id="acceptOffre" method="post" action="?p=addDemandeTrad">
 										<input type="hidden" name="devis_id" value=<?php echo $data['devis']['id']?>>
 										<input type="hidden" name="traducteur_id" value=<?php echo $traducteur['id']?>>
+										<label>Joindre le document prouvant votre paiement :
+											<input required type="file" name="document">
+										</label>
 										<div class="row">
 											<div class="col-xs-6 col-md-6">
 												<input type="submit" value="Envoyer une demande de traduction" />

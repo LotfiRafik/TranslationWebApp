@@ -13,15 +13,15 @@
 		left: 20%;
 	}
 	.traducteurs{
-	display: none; /* Hidden by default */
+		display: none; /* Hidden by default */
 		padding : 10px;
 		position: fixed; /* Stay in place */
 		background-color:white;
 		z-index: 1; /* Sit on top */
-		top: 20%;
-		left : 30%;
-		height: 50%; /* Full height */
-		width : 30%;
+		top: 5%;
+		left : 10%;
+		height: 90%; /* Full height */
+		width : 80%;
 		overflow-y : auto;overflow-x:hidden;
 		border : 1px black solid;
 	}
@@ -31,9 +31,11 @@
 
 		<div class="col-md-12">
 		<a class="pull-right" href="?p=deconnexion"><button class="btn btn-lg btn-danger">Déconnexion</button></a>
-			<a class="pull-right" href="../profiles/client_profile.html"><button class="btn btn-lg btn-info">Mon Profile</button></a>
+			<a href="?p=clientprofile&id=<?php echo $_SESSION['id']?>"><button class="btn btn-lg pull-right btn-success">Mon Profile</button></a>
+
 			<button  id="addv" class="btn btn-lg btn-info push-left">Nouveau Devis</button>
-			
+			<button  id="addm" class="btn btn-lg btn-info push-left">Demande Traduction</button>
+
 			<h3> Liste des Devis</h6>
 			<div class="ttable">
 			<table class="table">
@@ -171,24 +173,142 @@
 					</div>
 				</div>
 			<!-- FORMULAIRE DEMANDE DEVIS -->
+
+
+			<!-- FORMULAIRE DEMANDE TRADUCTION -->
+		<div id="ddt-form2" class="shadow-lg form-style-5">
+		<button class="pull-right btn-danger" type="button" onclick="document.getElementById('ddt-form2').style.display='none'" >x</button>
+				<form id="demandeTraduction_form" method="post" action="javascript:void(0)">
+					<h1>Demande de traduction :</h1>
+					<div class="row">
+							<div class="col-xs-6 col-md-6">
+								<label for="job">Nom:</label>
+								<input required type="text" name="nom" value=<?php echo $_SESSION['lastname']?>>
+							</div>
+							<div class="col-xs-6 col-md-6">
+								<label for="job">Prénom:</label>
+								<input required type="text" name="prenom" value=<?php echo $_SESSION['firstname']?>>
+							</div>
+					</div>
+					<div class="row">
+							<div class="col-xs-6 col-md-6">
+								<label for="job">Email:</label>
+								<input required type="email" name="email" value=<?php echo $_SESSION['email']?>>
+							</div>
+							<div class="col-xs-6 col-md-6">
+								<label for="job">Téléphone:</label>
+								<input required type="text" name="tel" value=<?php echo $_SESSION['telephone']?>>
+							</div>
+					</div>
+					<div class="row">
+							<div class="col-xs-12 col-md-12">
+								<label for="job">Adresse:</label>
+								<input required type="text" name="adresse" value=<?php echo $_SESSION['adresse']?>>
+							</div>
+					</div>
+					<div class="row">
+							<div class="col-xs-6 col-md-6">
+							<label for="job">Langue d'origine des documents*:</label>
+							<select name="langue_s">
+							<option selected="selected" value='Arabe'>Arabe</option>
+							<?php
+								foreach ($data['langues'] as $l) {
+										?>
+										<option value='<?php echo $l['id']; ?>'>
+										<?php echo $l['id']; ?>
+										</option>
+										<?php
+								}
+							?>
+							</select> 
+							</div>
+							<div class="col-xs-6 col-md-6">
+							<label for="job">Langue cible*:</label>
+							<select name="langue_d">
+								<option selected="selected" value='Anglais'>Anglais</option>
+							<?php
+								foreach ($data['langues'] as $l) {
+									?>
+										<option value='<?php echo $l['id']; ?>'>
+										<?php echo $l['id']; ?>
+										</option>
+										<?php
+								}
+							?>
+							</select> 
+							</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6 col-md-6">
+							<label for="job">Type de traduction souhaité:</label>
+								<select name="traduction_type">
+								<?php
+									foreach ($data['traduction_types'] as $type) {
+										?>
+										<option value='<?php echo $type['id']; ?>'>
+										<?php echo $type['description']; ?>
+										</option>
+										<?php
+									}
+								?>
+								</select>    
+								</div>
+								<div class="col-xs-6 col-md-6"></br>
+							<label for="assermente"> Traducteur Assermenté :
+								<input type="checkbox" id="assermente" name="assermente" value="1">
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6 col-md-6">
+					<textarea  name="comment" placeholder="Demande spécifique / commentaire ..."></textarea>	
+								</div>
+					<div class="row">
+						<div class="col-xs-6 col-md-6">
+							<label>Choisir le document a traduire :
+								<input required type="file" name="document">
+							</label>
+						</div>
+					</div>
+						<input type="submit" value="Valider " />
+						</form>	
+					</div>
+				</div>
+			<!-- FORMULAIRE DEMANDE TRADUCTION -->
 	
 
 			<div id="divTraducteurs" class="traducteurs" >
 				<form id="trad_checklist_form" method="post" action="?p=addTradDevis">
 					<h3>Selectionner les traducteurs que vous voulez:</h3>
-					<table id="tableTraducteurs" border="1"  >
-						<tr>
-							<th>Nom</th>
-							<th>Prenom</th>
-							<th>Email</th>
-							<th>Profile</th>
-							<th></th>
-						</tr>
-					</table>
+					<div id="tableTraducteurs"  class="row" >
+
+					</div>
+					<br><br>
 					<button type="button" onclick="document.getElementById('divTraducteurs').style.display='none'" >Annuler</button>	
 					<button type="submit" id="sendTraducteurs">Envoyez la demande</button>
 				</form>	
 			</div>
+
+
+			<div id="divTraducteurs2" class="traducteurs" >
+				<form id="trad_checklist_form2" method="post" action="?p=addTradDevis2">
+					<h3>Selectionner les traducteurs que vous voulez:</h3>
+					<div id="tableTraducteurs2" class="row" >
+					</div>
+					<br><br>
+					<div class="col-xs-6 col-md-6">
+					<label>Prix en dinar algérien:</label><input  class="form-control input"  type="number" name="prix" min="50" required> 
+									(L'offre minimal est a 50 DZD)
+					</div>		
+					<label>Joindre le document prouvant votre paiement :
+											<input required type="file" name="document">
+										</label>		
+								
+						<button type="button" onclick="document.getElementById('divTraducteurs2').style.display='none'" >Annuler</button>	
+					<button type="submit" id="sendTraducteurs2">Envoyez la demande</button>
+				</form>	
+			</div>
+
 
 		
 				

@@ -65,7 +65,7 @@ if(isset($_SESSION['id']))
         break; 
 
         case 'supDocument':
-          $Admincontroleur->deleteDocument($_GET['did']);
+          $Admincontroleur->deleteTransaction($_GET['did'],$_GET['tid']);
         break; 
         case 'downDevis':
           $Admincontroleur->downloadDevis($_GET['did']);
