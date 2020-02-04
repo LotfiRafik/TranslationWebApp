@@ -7,7 +7,7 @@ The website offers an application for receiving documents to be translated into 
 the site according to the profile of the translators. The site must offer a simple and practical organization for access and
 looking for a translator. It must have an administration part (Back-End) and a public part
 (Front End). Data management must be done separately from presentation and processing (MVC).
-Part I: Design and implementation of the Front-End, data organization
+# Part I: Design and implementation of the Front-End, data organization
 and layout
 In this part, you must design the Front-End part of the website in order to meet the requirements
 following:
@@ -32,7 +32,7 @@ translator (the same as the client), a CV file with the mandatory ".pdf" extensi
 the possibility of loading up to 3 files of these references. A "sworn translator" box
 is added, if it is selected then the candidate must load a file proving his
 Oaths.
-Part II: Design and creation of the Back-End and site functionalities
+# Part II: Design and creation of the Back-End and site functionalities
 The second part concerns the administration part of the site (back-End) and must meet the requirements
 following:
 The administration part consists of 5 categories arranged in the form of a frame with an image
